@@ -5,7 +5,6 @@ You can use it to test on your own computer programs and data you intend to use 
 You will need a computer with an operating system (Host OS) able to run Docker:
 
 https://docs.docker.com/engine/docker-overview/
-https://docs.docker.com/get-docker/
 
 We have built and tested our image primarily using Ubuntu Linux as Host OS.
 
@@ -14,6 +13,8 @@ We have built and tested our image primarily using Ubuntu Linux as Host OS.
 ### 1. Install Docker:
 
 (remember to use ‘sudo’ for administrative commands if you are not logged in as root)
+
+https://docs.docker.com/get-docker/
 
 ---
 
