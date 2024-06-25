@@ -6,8 +6,6 @@ You will need a computer with an operating system (Host OS) able to run Docker:
 
 https://docs.docker.com/engine/docker-overview/
 
-We have built and tested our image primarily using Ubuntu Linux as Host OS.
-
 ---
 
 ### 1. Install Docker:
@@ -19,6 +17,8 @@ https://docs.docker.com/get-docker/
 ---
 
 ### 2. Get the docker image from our Docker Hub repository (you may need to prepend ‘sudo’ before any docker command if you are using Linux):
+
+We have built and tested our image primarily using Ubuntu Linux as Host OS.
 
 `docker pull ppgcourseub/ppg2024:2406-r01`
 
