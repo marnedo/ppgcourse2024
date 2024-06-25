@@ -14,6 +14,7 @@ https://docs.docker.com/engine/docker-overview/
 
 https://docs.docker.com/get-docker/
 
+> [!NOTE]
 > Remember that you may need to use ‘sudo’ for administrative commands if you are not logged in as root in your computer.
 
 
@@ -37,8 +38,9 @@ After it's finished, you should see the downloaded image listed using this:
 
 `docker run -it --name=container_name 9c539d570554 /bin/bash` 
 
-> NOTE: The string ‘9c539d570554’ is the “ID” of the image you got at step 1. **This ID may be different on your computer**.
-> Check the correct ID on the listing from the `docker images` command. The expression after '--name=' is
+> [!IMPORTANT]
+> IMPORTANT: The string ‘9c539d570554’ is the “ID” of the image you got at step 1. **This ID may be different on your computer**.
+> Check the correct ID on the listing from the `docker images` command. Also, the expression after '--name=' is
 > the name of the new container. You can replace it with any other name you prefer.
 
 After running the previous command, you will see a new prompt symbol on your terminal (starting by 'ppguser@' follower by an arbitrary ID string). You are now running a new Docker container (more exactly, an interactive shell session on this container). 
@@ -73,6 +75,7 @@ The command prompt of your container will appear again.
 
 If your container is already running you can re-connect to it again with the previous command (docker exec ...) at any time.
 
+> [!NOTE]
 > Note: there are other ways of re-attaching to your container when it's already running, this is just one of them (probably the simpler one)
 
 ---
@@ -93,9 +96,11 @@ If you want to use this configuration, replace the initial 'docker run...' comma
 
 ...where '/home/username/ppgdata' or '/Users/username/ppgdata' is the host directory you want to 'share' with the conatiner (replace it with the directory you wish to use).
 
-> NOTE: The string ‘9c539d570554’ is the "ID" of the image you got at the step 1.
-> This ID may be different on your computer. Check the ID on the listing from the ‘docker images’ command.
-> Remember that the value after ‘--name=’ sets the name of the new running container. If you already created other container with the same name (from a previous docker run… command for example), you will get an error. To solve it, either change the name of the new container or remove (see below, section ‘Other useful commands’) the existing one with the conflicting name before creating the new one.
+> [!IMPORTANT]
+> IMPORTANT: The string ‘9c539d570554’ is the "ID" of the image you got at the step 1.
+> **This ID may be different on your computer**. Check the ID on the listing from the ‘docker images’ command.
+> [!IMPORTANT]
+> IMPORTANT: Remember that the value after ‘--name=’ sets the name of the new running container. If you already created other container with the same name (from a previous docker run… command for example), you **will get an error**. To solve it, either change the name of the new container or remove (see below, section ‘Other useful commands’) the existing one with the conflicting name before creating the new one.
 
 The difference here is the `-v` parameter, which creates a 'link' between the Host OS directory '/home/username/ppgdata' (or '/Users/username/ppgdata') and the container directory '/ppgdata'. To avoid permission problems inside your container when accessing the data in this directory, grant full read and write permissions on your Host OS directory (‘/home/username/ppgdata’ or 'Users/username/ppgdata' in this example) to all users. For example, on linux:
 
@@ -112,17 +117,20 @@ This is the preferred way we will be using at the computer lab sessions to share
 To stop a container:
 
 `docker stop container_name`
+> [!NOTE]
 > Remember: you can get the name of your container using `docker ps -a` 
 
 To remove a container:
 
 `docker rm container_name`
 
-> Note that a container needs to be stopped to be able to remove it.
+> [!WARNING]
+> Note that a container needs to be stopped first to be able to remove it.
 
 To remove images:
 
 `docker rmi imageid`
+> [!NOTE]
 > Remember: you can get the id of your image using `docker images`
 
 
