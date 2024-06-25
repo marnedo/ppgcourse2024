@@ -99,6 +99,7 @@ If you want to use this configuration, replace the initial 'docker run...' comma
 > [!IMPORTANT]
 > IMPORTANT: The string ‘9c539d570554’ is the "ID" of the image you got at the step 1.
 > **This ID may be different on your computer**. Check the ID on the listing from the ‘docker images’ command.
+
 > [!IMPORTANT]
 > IMPORTANT: Remember that the value after ‘--name=’ sets the name of the new running container. If you already created other container with the same name (from a previous docker run… command for example), you **will get an error**. To solve it, either change the name of the new container or remove (see below, section ‘Other useful commands’) the existing one with the conflicting name before creating the new one.
 
