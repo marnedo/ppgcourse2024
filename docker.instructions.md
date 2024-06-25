@@ -65,7 +65,8 @@ If you stopped your container, first type:
 
 `docker start container_name`
 
-> replace 'container_name' with the name of your container
+> [!NOTE]
+> Remember to replace 'container_name' with the specific name of your container
 
 And then type:
 
