@@ -4,7 +4,7 @@
 
 ## Software
 
-<ins>**TNT**</ins> is available at http://www.lillo.org.ar/phylogeny/tnt/
+<ins>**TNT**</ins>. Youy can found the binary executable of this programm **in the folder `software`** as part of the docker image. The program is also available at http://www.lillo.org.ar/phylogeny/tnt/
 
 **OTHER PROGRAMS:** 
 + <ins>**Mesquite:</ins>** Matrix and tree manipulation - http://www.mesquiteproject.org/Installation.html
