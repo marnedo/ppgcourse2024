@@ -12,14 +12,14 @@ https://docs.docker.com/engine/docker-overview/
 
 https://docs.docker.com/get-docker/
 
-> remember to use ‘sudo’ for administrative commands if you are not logged in as root in your computer
+> Remember that you may need to use ‘sudo’ for administrative commands if you are not logged in as root in your computer.
 
 
 ---
 
 ### 2. Get the docker image from our Docker Hub repository (you may need to prepend ‘sudo’ before any docker command):
 
-We have built and tested our image primarily on Ubuntu Linux as Host OS.
+The image has been primarily tested on Ubuntu Linux as Host OS.
 
 `docker pull ppgcourseub/ppg2024:2406-r01`
 
@@ -97,7 +97,7 @@ If you want to use this configuration, replace the initial 'docker run...' comma
 
 The difference here is the `-v` parameter, which creates a 'link' between the Host OS directory '/home/username/ppgdata' (or '/Users/username/ppgdata') and the container directory '/ppgdata'. To avoid permission problems inside your container when accessing the data in this directory, grant full read and write permissions on your Host OS directory (‘/home/username/ppgdata’ or 'Users/username/ppgdata' in this example) to all users. For example, on linux:
 
-`chmod 777 /home/username/ppgdata`
+`chmod -R 777 /home/username/ppgdata`
 
 After this, anything you put in the '/home/username/ppgdata' directory of your computer Host OS will be available immediately at the '/ppgdata' directory of your container, and also the other way around. This is a convenient and simple way of providing data files to use with your programs installed in your container, and also to get results and other data out from your container to your host OS.
 
