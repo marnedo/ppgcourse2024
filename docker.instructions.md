@@ -39,7 +39,7 @@ After it's finished, you should see the downloaded image listed using this:
 `docker run -it --name=container_name 9c539d570554 /bin/bash` 
 
 > [!IMPORTANT]
-> IMPORTANT: The string ‘9c539d570554’ is the “ID” of the image you got at step 1. **This ID may be different on your computer**.
+> The string ‘9c539d570554’ is the “ID” of the image you got at step 1. **This ID may be different on your computer**.
 > Check the correct ID on the listing from the `docker images` command. Also, the expression after '--name=' is
 > the name of the new container. You can replace it with any other name you prefer.
 
@@ -76,7 +76,7 @@ The command prompt of your container will appear again.
 If your container is already running you can re-connect to it again with the previous command (docker exec ...) at any time.
 
 > [!NOTE]
-> Note: there are other ways of re-attaching to your container when it's already running, this is just one of them (probably the simpler one)
+> There are other ways of re-attaching to your container when it's already running, this is just one of them (probably the simpler one)
 
 ---
 
@@ -86,22 +86,22 @@ One of the most practical ways to make the data files you need to run your progr
 
 If you want to use this configuration, replace the initial 'docker run...' command from section 3 with this one:
 
-* In Linux:
+* On Linux:
 
 `docker run -it –name=container_name -v /home/username/ppgdata:/ppgdata 9c539d570554 /bin/bash`
 
-* In Mac:
+* On Mac:
 
 `docker run -it –name=container_name v /Users/username/ppgdata:/ppgdata 9c539d570554 /bin/bash`
 
 ...where '/home/username/ppgdata' or '/Users/username/ppgdata' is the host directory you want to 'share' with the conatiner (replace it with the directory you wish to use).
 
 > [!IMPORTANT]
-> IMPORTANT: The string ‘9c539d570554’ is the "ID" of the image you got at the step 1.
+> The string ‘9c539d570554’ is the "ID" of the image you got at the step 1.
 > **This ID may be different on your computer**. Check the ID on the listing from the ‘docker images’ command.
 
 > [!IMPORTANT]
-> IMPORTANT: Remember that the value after ‘--name=’ sets the name of the new running container. If you already created other container with the same name (from a previous docker run… command for example), you **will get an error**. To solve it, either change the name of the new container or remove (see below, section ‘Other useful commands’) the existing one with the conflicting name before creating the new one.
+> Remember that the value after ‘--name=’ sets the name of the new running container. If you already created other container with the same name (from a previous docker run… command for example), you **will get an error**. To solve it, either change the name of the new container or remove (see below, section ‘Other useful commands’) the existing one with the conflicting name before creating the new one.
 
 The difference here is the `-v` parameter, which creates a 'link' between the Host OS directory '/home/username/ppgdata' (or '/Users/username/ppgdata') and the container directory '/ppgdata'. To avoid permission problems inside your container when accessing the data in this directory, grant full read and write permissions on your Host OS directory (‘/home/username/ppgdata’ or 'Users/username/ppgdata' in this example) to all users. For example, on linux:
 
