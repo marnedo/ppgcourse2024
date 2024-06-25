@@ -112,6 +112,7 @@ This is the preferred way we will be using at the computer lab sessions to share
 To stop a container:
 
 `docker stop container_name`
+> Remember: you can get the name of your container using `docker ps -a` 
 
 To remove a container:
 
@@ -122,6 +123,7 @@ To remove a container:
 To remove images:
 
 `docker rmi imageid`
+> Remember: you can get the id of your image using `docker images`
 
 
 
