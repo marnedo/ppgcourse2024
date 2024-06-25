@@ -1,4 +1,4 @@
-## How to use the 2024 PPG course Docker
+## How to use our Docker image
 
 ### This is a quick guide on how to get the Docker image that contains the command-line software requested by the course instructors, and how to run it as a container on your system.
 
