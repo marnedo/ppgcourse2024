@@ -24,6 +24,7 @@ We have built and tested our image primarily using Ubuntu Linux as Host OS.
 `docker pull ppgcourseub/ppg2024:2406-r01`
 
 This will take a while, depending on the speed of your internet connection.
+
 After it's finished, you should see listed the downloaded image using this:
 
 `docker images`
