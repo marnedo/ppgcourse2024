@@ -10,9 +10,10 @@ https://docs.docker.com/engine/docker-overview/
 
 ### 1. Install Docker:
 
-(remember to use ‘sudo’ for administrative commands if you are not logged in as root)
-
 https://docs.docker.com/get-docker/
+
+> remember to use ‘sudo’ for administrative commands if you are not logged in as the root in your computer
+
 
 ---
 
