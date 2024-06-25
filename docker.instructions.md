@@ -83,11 +83,11 @@ If you want to use this configuration, replace the initial 'docker run...' comma
 
 * In Linux:
 
-docker run -it –name=container_name -v /home/username/ppgdata:/ppgdata 9c539d570554 /bin/bash
+`docker run -it –name=container_name -v /home/username/ppgdata:/ppgdata 9c539d570554 /bin/bash`
 
 * In Mac:
 
-d docker run -it –name=container_name v /Users/username/ppgdata:/ppgdata 9c539d570554 /bin/bash
+`docker run -it –name=container_name v /Users/username/ppgdata:/ppgdata 9c539d570554 /bin/bash`
 
 > NOTE: The string ‘9c539d570554’ is the “name” (id, more properly) of the image you got at step 1.
 > This name may be different on your computer (it depends on the Docker version). Check the correct name on the listing from the ‘docker images’ command.
