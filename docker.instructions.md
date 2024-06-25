@@ -35,7 +35,7 @@ After it's finished, you should see listed the downloaded image using this:
 
 `docker run -it --name=container_name 9c539d570554 /bin/bash` 
 
-> NOTE: The string ‘9c539d570554’ is the “name” (id, more properly) of the image you got at step 1. This name may be different on your computer
+> NOTE: The string ‘9c539d570554’ is the “ID” of the image you got at step 1. This name may be different on your computer
 > (it depends on the Docker version). Check the correct name on the listing from the `docker images` command. The expression after '--name=' is
 > the name of the new container. You can replace it with any other name you prefer.
 
@@ -89,7 +89,7 @@ If you want to use this configuration, replace the initial 'docker run...' comma
 
 `docker run -it –name=container_name v /Users/username/ppgdata:/ppgdata 9c539d570554 /bin/bash`
 
-> NOTE: The string ‘9c539d570554’ is the “name” (id, more properly) of the image you got at step 1.
+> NOTE: The string ‘9c539d570554’ is the "ID" of the image you got at step 1.
 > This name may be different on your computer (it depends on the Docker version). Check the correct name on the listing from the ‘docker images’ command.
 > Remember that the value after ‘--name=’ sets the name of the new running container. If you already created other container with the same name (from a previous docker run… command for example), you will get an error. To solve it, either change the name of the new container or remove (see below, section ‘Other useful commands’) the existing one with the conflicting name before creating the new one]
 
