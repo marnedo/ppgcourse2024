@@ -83,7 +83,7 @@ If your container is already running you can re-connect to it again with the pre
 
 ### 5. Additional info: Running your container with  a 'shared' data directory
 
-One of the most practical ways to make the data files you need to run your programs available to your container is to SET A “SHARED DIRECTORY” between your host OS and the container. All the data you put in that directory on your Host OS will be available also in the linked directory of your running container. Conversely, all the data you store in the linked container directory will be available in your Host OS corresponding directory. 
+One of the most practical ways to make the data files you need to run your programs available to your container is to set a **shared directory** between your host OS and the container. All the data you put in that directory on your Host OS will be available also in the linked directory of your running container. Conversely, all the data you store in the linked container directory will be available in your Host OS corresponding directory. 
 
 If you want to use this configuration, replace the initial 'docker run...' command from section 3 with this one:
 
