@@ -33,28 +33,16 @@ First we will create/edit a bash script to run `FastQC` software in the cluster 
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=FastQC
-#SBATCH --error FastQC-%j.err
-#SBATCH --output FastQC-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load fastqc
-
 # jobs to launch
 fastqc -t 8 ./0data/reads.left.fq.gz ./0data/reads.right.fq.gz -o ./1QC
 ```
 
 To launch `FastQC` script in the cluster write on the terminal:
 ```
-sbatch scripts/fastQC.run
+bash scripts/fastQC.run
 ```
 
-Use "s_jobs" command to check the state of the process. To check the results you need to download the files on a local computer. WARNING: mind to change the paths accordingly
+To check the results you need to download the files on a local computer. WARNING: mind to change the paths accordingly
 ```
 scp -r user@cluster:/my_CLUSTER_path_to_practice_folder/* my_LOCAL_path_to_practice/
 ```
@@ -74,27 +62,14 @@ Then we will create/edit a bash script to run Trimmomatic software in the cluste
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=trimmomatic
-#SBATCH --error trimmomatic-%j.err
-#SBATCH --output trimmomatic-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load trimmomatic
-
 # jobs to launch
 trimmomatic PE -threads 8 ./0data/reads.left.fq.gz ./0data/reads.right.fq.gz ./2trimmed_data/reads_1.P.fq.gz ./2trimmed_data/reads_1.U.fq.gz ./2trimmed_data/reads_2.P.fq.gz ./2trimmed_data/reads_2.U.fq.gz ILLUMINACLIP:./TruSeq3-PE.fa:2:30:1 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
 
 To launch the Trimmomatic script in the cluster write on the terminal:
 ```
-sbatch scripts/trimSeq.run
+bash scripts/trimSeq.run
 ```
-Use "s_jobs" command to check the state of the process. `
 
 ### 1.3. Quality control of the trimmed sequences
 Now we will perform the quality control (QC) of the trimmed sequences using again the software `FastQC`. First of all, we will create a folder for the QC output files
@@ -107,18 +82,6 @@ Since now we have 4 files to check (2 paired, 2 unpaired) we will use a loop to 
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=FastQC_loop
-#SBATCH --error FastQC_loop-%j.err
-#SBATCH --output FastQC_loop-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load fastqc
-
 # jobs to launch
 for file in ./2trimmed_data/*fq.gz;
         do
@@ -128,9 +91,9 @@ for file in ./2trimmed_data/*fq.gz;
 
 To launch fastQC_loop.sh script in the cluster write on the terminal:
 ```
-sbatch scripts/fastQC_loop.run
+bash scripts/fastQC_loop.run
 ```
-Use "s_jobs" command to check the state of the process. To check the results you need to download the files on a local computer. WARNING: mind to change the paths accordingly
+To check the results you need to download the files on a local computer. WARNING: mind to change the paths accordingly
 ```
 scp -r user@cluster:/my_CLUSTER_path_to_practice_folder/* my_LOCAL_path_to_practice/
 ```
@@ -151,26 +114,13 @@ We will create/edit a bash script to run `trinity` software (*trinity.run*) to o
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=trinity
-#SBATCH --error trinity-%j.err
-#SBATCH --output trinity-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load Trinity 
-
 # jobs to launch
 Trinity --left ./2trimmed_data/reads_1.P.fq.gz --right ./2trimmed_data/reads_2.P.fq.gz --seqType fq --normalize_reads --normalize_max_read_cov 30 --max_memory 6G --CPU 8 --output ./4trinity
 ```
 To launch the trinity script in the cluster write on the terminal:
 ```
-sbatch scripts/trinity.run
+bash scripts/trinity.run
 ```
-Use "s_jobs" command to check the state of the process. 
 
 ### 2.1. cd-hit: redundance reduction
 
@@ -185,24 +135,12 @@ First we will create/edit a bash script to run cd-hit software (*cd-hit.run*):
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=cdhit
-#SBATCH --error cdhit-%j.err
-#SBATCH --output cdhit-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load cdhit
-
 cd-hit-est -i ./4trinity/Trinity.fasta -o ./5cdhit/Trinity_cdhit.fasta -c 0.9 -M 0 -T 8 > ./5cdhit/Trinity_cdhit.err
 
 ```
 To launch the script in the cluster write on the terminal:
 ```
-sbatch scripts/cd-hit.run
+bash scripts/cd-hit.run
 ```
 
 ### 3. Post-processing
@@ -221,18 +159,6 @@ First we will create/edit a bash script to run the stats (*trinityQC.run*) to ob
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=trinityQC
-#SBATCH --error trinityQC-%j.err
-#SBATCH --output trinityQC-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load Trinity
-
 # jobs to launch
 /opt/ohpc/pub/eb/software/Trinity/2.10.0-foss-2019b-Python-3.7.4/trinityrnaseq-v2.10.0/util/TrinityStats.pl ./4trinity/Trinity.fasta > ./6QC_trinity/Trinity_assembly.metrics
 /opt/ohpc/pub/eb/software/Trinity/2.10.0-foss-2019b-Python-3.7.4/trinityrnaseq-v2.10.0/util/TrinityStats.pl ./5cdhit/Trinity_cdhit.fasta > ./6QC_trinity/Trinity_cdhit_assembly.metrics
@@ -240,7 +166,7 @@ module load Trinity
 ```
 To launch the script in the cluster write on the terminal:
 ```
-sbatch scripts/trinityQC.run
+bash scripts/trinityQC.run
 ```
 
 ### 3.2. Representation of reads
@@ -253,19 +179,6 @@ First we will create/edit a bash script to run `hisat2` software (*hisat2.run*).
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=hisat2
-#SBATCH --error hisat2-%j.err
-#SBATCH --output hisat2-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load hisat2
-module load python
-
 # jobs to launch
 hisat2-build ./4trinity/Trinity.fasta ./4trinity/Trinity
 hisat2 -p 10 -x ./4trinity/Trinity -1 ./2trimmed_data/reads_1.P.fq.gz -2 ./2trimmed_data/reads_2.P.fq.gz -S ./6QC_trinity/reads.sam &> ./6QC_trinity/reads.sam.info
@@ -273,7 +186,7 @@ hisat2 -p 10 -x ./4trinity/Trinity -1 ./2trimmed_data/reads_1.P.fq.gz -2 ./2trim
 
 To launch the script in the cluster write on the terminal:
 ```
-sbatch scripts/hisat2.run
+bash scripts/hisat2.run
 ```
 
 ### 3.3. From ncl to aa: TransDECODER
@@ -289,18 +202,6 @@ mkdir 7proteome
 ```
 #!/bin/bash
 
-# define names
-#SBATCH --job-name=transdecoder
-#SBATCH --error transdecoder-%j.err
-#SBATCH --output transdecoder-%j.out
-
-# memory and CPUs request
-#SBATCH --mem=6G
-#SBATCH --cpus-per-task=8
-
-# module load
-module load transdecoder # [update with the version installed in the cluster]
-
 # jobs to launch
 
 TransDecoder.LongOrfs -t ./4trinity/Trinity.fasta 
@@ -308,7 +209,7 @@ TransDecoder.LongOrfs -t ./4trinity/Trinity.fasta
 
 To launch the script in the cluster write on the terminal:
 ```
-sbatch scripts/transdecoder.run
+bash scripts/transdecoder.run
 ```
 
 #### Bibliography
