@@ -24,7 +24,7 @@ With command line we can create a file, read it and remove it:
 
 ```
 touch test.txt
-gedit test.txt &
+nano test.txt &
 cat test.txt
 rm test.txt
 ```
