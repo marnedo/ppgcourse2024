@@ -17,9 +17,9 @@ According to its website *ANGSD is a software for analyzing next generation sequ
 
 ## Data description and access
 
-For the exercises we are going to use mapped data (BAM files) from chr11 of the 1000 Genomes Consortium.
+For the exercises we are going to use mapped data (BAM files) of the human chromosome 11 from the 1000 Genomes Consortium.
 
-**NOTICE that the data to be used in this practice is already available on the server. We have downloaded them to a data folder (/data/datasets/Calling_variants_from_low-coverage_ngs_data/) before the session, to avoid excessive download traffic during class. YOU DON'T HAVE TO COPY ANYTHING IN  YOUR HOME, environmental variables are set to read the data in that folder.**
+**NOTICE that you **
 
 ## Intro to ANGSD
 
