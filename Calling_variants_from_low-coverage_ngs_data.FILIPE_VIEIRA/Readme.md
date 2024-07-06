@@ -197,7 +197,7 @@ How many genotype likelihoods do we expect per position? Why?
 
 To calculate GL, we can modify our batch script by replacing the `angsd` command with:
 ```
-angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doGlf 2 -doMajorMinor 1 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doGlf 2 -doMajorMinor 1 -nThreads 8
 ```
 Parameter | Meaning
 --- | ---
@@ -361,7 +361,7 @@ $ANGSD/angsd -doPost
 
 If you have a population, you can use `-doPost 1` (frequencies under HWE as prior) but here, since we have individuals from different populations, we will use `-doPost 2` (uniform prior). Replace the angsd command in your batch script with this one):
 ```
-angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_CG_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doPost 2 -doGeno 3 -doBcf 1 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_CG_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doPost 2 -doGeno 3 -doBcf 1 -nThreads 8
 ```
 Parameter | Meaning
 --- | ---
@@ -378,7 +378,7 @@ You can control how to set missing genotype when their confidence is low with `-
 For instance, we can set as missing genotypes when their (highest) genotype posterior probability is below 0.95, in this case the line to replace with in the script would be:
 
 ```
-angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_CG_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 3 -doPost 2 -postCutoff 0.95 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_CG_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doGeno 3 -doPost 2 -postCutoff 0.95 -nThreads 8
 ```
 
 Setting this threshold depends on the mean sequencing depth of your data, as well as your application.
@@ -388,7 +388,7 @@ For some analyses you need to work only with high quality genotypes (e.g. measur
 ## Extra Exercises - PCA and ngsAdmix
 One of the most common exploratory analyses done, is probably a PCA plot and, right after, probably an admixture plot. ANGSD (and some extra tools) can do some of these analyses. Use the same template batch script and replace the angsd command with:
 ```
-angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL_PCA -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doGlf 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doIBS 1 -doCov 1 -makeMatrix 1 -minMaf 0.05 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL_PCA -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doGlf 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doIBS 1 -doCov 1 -makeMatrix 1 -minMaf 0.05 -nThreads 8
 ```
 Parameter | Meaning
 --- | ---
@@ -407,23 +407,10 @@ Remember that to visualize this pdf file you must download the file to your comp
 
 **ngsAdmix**
 
-Here you have a template batch script to run `MGSadmix` in the cluster:
+Here you have the script to run `MGSadmix`:
 
 ```
-#!/bin/bash                                                                                                             
-
-# define names                                                                                                          
-#SBATCH --job-name=ngsadmix                                                                                        
-#SBATCH --error ngsadmix-%j.err                                                                                     
-#SBATCH --output ngsadmix-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8   
-
-# module load                                                                                                           
-module load angsd         
-
+#!/bin/bash                                                                                                               
 # running the program
 NGSadmix -likes 1000G_GL_PCA.beagle.gz -K 3 -P 4 -o 1000G_GL -minMaf 0.05 -P 8
 ```
