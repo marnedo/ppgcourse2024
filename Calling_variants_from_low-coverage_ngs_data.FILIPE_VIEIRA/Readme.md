@@ -259,7 +259,7 @@ $ANGSD/angsd -doMajorMinor
 
 A possible command line to estimate allele frequencies might be (replace the angsd command in your batch fiile accordingly):
 ```
-angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -nThreads 8
+angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1
 ```
 Parameter | Meaning
 --- | ---
@@ -361,7 +361,7 @@ $ANGSD/angsd -doPost
 
 If you have a population, you can use `-doPost 1` (frequencies under HWE as prior) but here, since we have individuals from different populations, we will use `-doPost 2` (uniform prior). Replace the angsd command in your batch script with this one):
 ```
-angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_CG_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doPost 2 -doGeno 3 -doBcf 1 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_CG_MAF -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doPost 2 -doGeno 3 -doBcf 1
 ```
 Parameter | Meaning
 --- | ---
@@ -388,7 +388,7 @@ For some analyses you need to work only with high quality genotypes (e.g. measur
 ## Extra Exercises - PCA and ngsAdmix
 One of the most common exploratory analyses done, is probably a PCA plot and, right after, probably an admixture plot. ANGSD (and some extra tools) can do some of these analyses. Use the same template batch script and replace the angsd command with:
 ```
-angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL_PCA -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doGlf 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doIBS 1 -doCov 1 -makeMatrix 1 -minMaf 0.05 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_GL_PCA -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minMapQ 20 -minQ 20 -minInd 5 -doCounts 1  -setMinDepth 30 -setMaxDepth 150 -GL 2 -doGlf 2 -doMajorMinor 1 -doMaf 1 -SNP_pval 1e-6 -doIBS 1 -doCov 1 -makeMatrix 1 -minMaf 0.05
 ```
 Parameter | Meaning
 --- | ---
