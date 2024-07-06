@@ -32,9 +32,7 @@ ghget https://github.com/ppgcourseUB/ppgcourse2024_week2/tree/main/Calling_varia
 
 ```bash
 cd Calling_variants_from_low-coverage_ngs_data.FILIPE_VIEIRA
-cd Data
 bash get_data.sh
-cd ..
 ```
 
 ## Intro to ANGSD
