@@ -145,11 +145,10 @@ ANGSD can extract some QC info. You can use this script to run `angsd`:
 ```
 #!/bin/bash
 
-DATA=/data/datasets/Calling_variants_from_low-coverage_ngs_data/
-REF=$DATA/hs37d5.fa.gz
+REF=hs37d5.fa.gz
 
 # running the program
-angsd -b $DATA/samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_QC -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minQ 0 -doCounts 1 -doQsDist 1 -doDepth 1 -maxDepth 500 -nThreads 8
+angsd -b samples.bam_list -ref $REF -r 11:21000000-22000000 -out 1000G_QC -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -C 50 -baq 1 -minQ 0 -doCounts 1 -doQsDist 1 -doDepth 1 -maxDepth 500 -nThreads 8
 ```
 
 and then we can plot them:
