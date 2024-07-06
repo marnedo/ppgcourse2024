@@ -140,7 +140,7 @@ Parameter | Meaning
 -setMinDepth 30 | minimum total depth
 -setMaxDepth 150 | maximum total depth
 
-ANGSD can extract some QC info. You can use this bacth file to send the job using `sbath`:
+ANGSD can extract some QC info. You can use this script to run `angsd`:
 
 ```
 #!/bin/bash                                                                                                             
