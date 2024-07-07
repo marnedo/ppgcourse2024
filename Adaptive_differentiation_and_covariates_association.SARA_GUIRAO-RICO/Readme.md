@@ -1,28 +1,27 @@
-# PPG_course - BayPass
+# Adaptive_differentiation_and_covariates_association
 
+Instructor: Sara Guirao Rico
 
 In this practical class we will try to identify human **SNPs with evidences of local adaptive diversification** and/or **significantly associated to geographical variables** while taking into account the null correlation of allele frequencies across populations.
 
-* We will use a modified version of the data used in Coop et al. (2010). It consists of **genotypes** corresponding to **2335 SNPs** (2333 + 2) for **927 individuals** from **52 human populations** of the Human Genome Diversity Project (HGDP) panel (Conrad et al. 2006). The last two SNPs (rs12913832 and rs1042602) were added manually. 
+* We will use a subset of the data used in Coop et al. (2010). It consists of **genotypes** corresponding to **2335 SNPs** (2333 + 2) for **927 individuals** from **52 human populations** of the Human Genome Diversity Project (HGDP) panel (Conrad et al. 2006). The last two SNPs (rs12913832 and rs1042602) were added manually. 
 These **two SNPs** have been previously reported to be **under positive selection in European populations** and are located in genes (ERC2 and TYR) involved in **light skin and eye color** (Wilde et al.2014).
 * The covariates (geographical variables) explored are **latitude**, **longitude** and a categorical variable with value = 1 if the population is **European** and -1 if is not.
- 
-:warning: Note that even we are performing the analysis with a very reduce dataset, the time it takes to run some of the models is above the available time in this practice and therefore, in some cases, we will use some of the results previously obtained (**precomputed results**) to calculate some of the statistics or to plot them using R.
+
+>[!Warning]
+> Note that even we are performing the analysis with a very reduce dataset, the time it takes to run some of the models is above the available time in this practice and therefore, in some cases, we will use some of the results previously obtained (**precomputed results**) to calculate some of the statistics or to plot them using R.
 
 ## Working space
-We are going to work with **three different consoles/terminals**:
+We are going to work in a container of the image *ppgcourseub/ppg24:latest*
 
-* To run BayPass Models (sbatch command) and to perform simulations (R) in the cluster.  
-	> :warning: Run the scripts always from the scripts folder
-* To compute some statistics (R) and plot the obtained results (R) in your laptop ("my_folder").
-*	> :warning: Open the R session and set "my_folder" as the working directory. Run the R commands without closing the R session. 
-* To download and copy some precomputed results ("results" folder) to a new created folder "my_folder" in your laptop. 
+Yoy can find teh executable binary of `BayPass` (g_baypass) is in the folder `./software/baypass_public/source. 
+ 
 
 ## Get data
 1. Retrieve the **input data** and the **scripts** for this session:  
  
 ```bash
-svn export https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO
+ghget export https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO
 ```
 
 * The folder has two main subfolders:
