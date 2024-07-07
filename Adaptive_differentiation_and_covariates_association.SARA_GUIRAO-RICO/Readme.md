@@ -400,6 +400,7 @@ bash run_stdis_model.sh
 # run BayPass (STDis Model)
 ../software/baypass_public/source/g_baypass -npop 52 -gfile ../input/hgdp.geno -efile covariates -scalecov -outprefix hgdp_stdis
 ```
+
 > * This generates 9 output files.
 > * It takes ~ 6 mins.
 
@@ -655,9 +656,9 @@ plot(hgdp_stdis.snp.res[hgdp_stdis.snp.res[,1]==3,]$Beta_is,
 	mtext("STDis Model: European Origin",side=3,line=- 1.5,outer=TRUE)
 dev.off()
 ```
+
 ```diff
 - QUESTION: How many significant SNPs are correlating with any of the covariates? based on what criteria, BF or eBPis? Are all of them correlating in the same way?
-
 ```
 
 # EXTRA EXERCISES
