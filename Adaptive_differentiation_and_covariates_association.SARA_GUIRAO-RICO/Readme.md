@@ -1,4 +1,4 @@
-# Adaptive_differentiation_and_covariates_association
+# Adaptive differentiation and_covariates association
 
 Instructor: Sara Guirao Rico
 
@@ -17,7 +17,7 @@ We are going to work in a container of the image *ppgcourseub/ppg24:latest*
 Yoy can find teh executable binary of `BayPass` (g_baypass) is in the folder `./software/baypass_public/source. 
  
 
-## Get data
+## Data
 1. Retrieve the **input data** and the **scripts** for this session:  
  
 ```bash
@@ -37,31 +37,7 @@ scp -r username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets
 
 * The files in the results folder are classified in subfolders according to the model/process (e.g., CORE, STDis,...) and for each in turn, in simulations or plot subfolders.
 
-3. **Create a new folder in your laptop** called **"my_results"** and download there the script **baypass_utils.R** that it is provided in the BayPass package.
-
-```bash
-mkdir my_results
-cd my_results
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets/BayPass/baypass_utils.R .
-```
-
-*  The baypass_utils.R file contains six R functions (R Core Team, 2015) (simulate.baypass(); plot.omega(); fmd.dist(); geno2YN() and simulate.PC.correlated.covariate() that may helpful to interpret some of the results obtained with BAYPASS.  
- 
- 
-4. Start a **new R session** and **install** and **upload** the **R libraries**
-
-```R
-#Go to the new created folder
-cd ./my_results
-
-#Start a new R session
-R
-
-#Install four R packages
-install.packages(c("corrplot", "ape", "geigen", "mvtnorm"))
-require(corrplot); require(ape); require(geigen);require(mvtnorm)
-source("baypass_utils.R")
-```
+3. The "baypass_utils.R" file contains six R functions (R Core Team, 2015) (simulate.baypass(); plot.omega(); fmd.dist(); geno2YN() and simulate.PC.correlated.covariate() that may helpful to interpret some of the results obtained with BAYPASS.  
 
 Now you are ready to run BayPass.
 
