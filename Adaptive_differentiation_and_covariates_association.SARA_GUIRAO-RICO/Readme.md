@@ -487,7 +487,7 @@ dev.off()
 **In R**
 
 ``R
-source("/opt/ohpc/pub/apps/BayPass/2.3/utils/baypass_utils.R")
+source("baypass_utils.R")
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution obtained when running the CORE Model
 pi.beta.coef=read.table("hgdp_core_s1_summary_beta_params.out",h=T)$Mean
@@ -506,51 +506,18 @@ simu.hgdp_10000 <- simulate.baypass(omega.mat=omega_s1, nsnp=10000,
 > [!Warning]
 > We are not running the part between the two :no_entry: symbols for a matter of time ( it takes about ~ 25 mins). Instead, we are going to use the precomputed files in the results folder
 
-4.2. Run STDis model with 10,000 PODS as input by submit the job script "run_stdis_10000_simulations.sh" using the **sbatch command**.
+4.2. Run STDis model with 10,000 PODS as input with the script "run_stdis_10000_simulations.sh" 
 
-:no_entry:
 ```bash
-#In the scripts subfolder
-sbatch run_stdis_10000_simulations.sh
+bash scripts/run_stdis_10000_simulations.sh
 ```
 > * This is the code to run the "run_stdis_10000_simulations.sh" script:
 
 ```bash
 #!/bin/bash                                                                                                             
 
-# define names                                                                                                          
-#SBATCH --job-name=bp_stdis_10000_sim                                                                                         
-#SBATCH --error bp_stdis_10000-%j.err                                                                                     
-#SBATCH --output bp_stdis_10000-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
-
 # run BayPass (CORE Model) with the 10000 PODs as input
-g_baypass -npop 52 -gfile G.hgdp_pods_10000 -efile covariates -scalecov -nthreads 8 -outprefix hgdp_stdis_10000_pods
-```
-
-4.3. **Copy** the previously obtained results to the **my_results** folder in **your laptop**:
-
-```bash
-cd my_results
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/*_10000* .
-```
-:no_entry:
-
-4.3. **Copy** the precomputed results to the folder **my_results** in **your laptop**:
-
-```bash
-cd my_results
-scp ../results/STDis_Model/simulations/*_10000* .
+../software/baypass_public/source/g_baypass -npop 52 -gfile ../imput/G.hgdp_pods_10000 -efile covariates -scalecov  -outprefix hgdp_stdis_10000_pods
 ```
 
 4.4. **Sanity check** (**R in your laptop**).
