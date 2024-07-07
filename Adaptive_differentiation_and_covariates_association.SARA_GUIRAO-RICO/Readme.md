@@ -71,7 +71,7 @@ bash ./scripts/run_core_model_seed1.sh
 #!/bin/bas
 
 # run BayPass (CORE Model) with seed1
-./software/baypass_public/sources/g_baypass -npop 52 -gfile ./intput/hgdp.geno -seed 15263 -outprefix hgdp_core_s1
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ../intput/hgdp.geno -seed 15263 -outprefix hgdp_core_s1
 ```
 > * To check if it is running, type: "squeue -u username"
 > * It takes ~ 6 mins each one
@@ -80,9 +80,10 @@ bash ./scripts/run_core_model_seed1.sh
 
 2. **Sanity Check**. 
 
-3.1. **In the R session** that you started before, **compare the omega matrices** obtained under the CORE Model when using different seeds to check consistency in the estimation of parameters of the model.
+3.1. **In an R session**, we can compare the omega matrices obtained under the CORE Model when using different seeds to check consistency in the estimation of parameters of the model.
 
 ```R
+source("baypass_utils.R")
 #Read omegas obtained from running the CORE Model with three different seeds
 omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
 omega_s2=as.matrix(read.table(file="hgdp_core_s2_mat_omega.out", header=F))
