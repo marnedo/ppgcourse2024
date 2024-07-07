@@ -94,6 +94,7 @@ pdf(file="omega_s1_s2_comparison.pdf")
 	plot(omega_s1, omega_s2) ; abline(a=0,b=1)
 dev.off()
 ```
+
 ```diff
 - QUESTION: Are they similar?
 ```
@@ -108,13 +109,14 @@ dist.12
 dist.13
 dist.23
 ```
+
 ```diff
 - QUESTION: Are they similar?
 ```
 
 > * If the omegas are not significantly different we can assume that there is consistency in the parameters estimation and hence, you should choose one of the omegas to perform the subsequent analyses (e.g., omega 1).
 
-4. **Visualization** of the shared history of populations (**R in your laptop**).
+4. **Visualization** of the shared history of populations (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 4.1. Explore the **shared history of populations** by transforming the omega covariance matrix into a **correlation matrix** using the R function cov2cor().
 
@@ -168,7 +170,7 @@ dev.off()
 ```
 > * If you want to modify the size of the text you should modify the baypass_utils.R script
 
-5. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**R in your laptop**).
+5. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**)
 
 ```R
 #Read the XtX file:
@@ -182,11 +184,12 @@ plot(hgdp_s1.snp.res$XtXst, xlab="SNP", ylab="XtXst", main="XtXst Seed 1")
 	points(x= 2335, y=hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2335, ]$XtXst, col = "blue", pch=20)
 dev.off()
 ```
+
 ```diff
 - QUESTION: Which are the XtXst outliers? How many there are? Do we need to perform a test to know how many of them are significant?
 ```
 
-6. **Check behavior of the *P*-values** associated to the XtXst estimator (**R in your laptop**).
+6. **Check behavior of the *P*-values** associated to the XtXst estimator (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 pdf("omega_XtXst_pvals_hist.pdf")
@@ -220,11 +223,12 @@ dev.off()
 hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2334, ]$log10.1.pval.
 hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2335, ]$log10.1.pval.
 ```
+
 ```diff
 - QUESTION: Which XtXst values are significant?
 ```
 
-7. **Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**R in your laptop**).
+7. **Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 #Install the "qvalue" R package
@@ -250,37 +254,20 @@ sum(qvals < 0.001)
 
 8. Pseudo Observed Data (PODs) 
 
-Here, we are going to **simulate data (PODs)** using the R function simulate.baypass() in the baypass_utils.R script (provided in the BayPass package).
-PODs are simulated under the inference model (e.g., using posterior estimates of the covariance matrix and the a and b parameters of the beta prior distribution for the overall (across population) SNP allele frequencies).
+Here, we are going to **simulate data (PODs)** using the R function simulate.baypass() in the baypass_utils.R script (provided in the BayPass package). PODs are simulated under the inference model (e.g., using posterior estimates of the covariance matrix and the a and b parameters of the beta prior distribution for the overall (across population) SNP allele frequencies).
 Once these PODS are simulated, we need to **run again the CORE Model with the PODs as input** to built the \"expected\" distribution of the XtX values under the inference model in order to find which of the observed XtX values are significantly different from the expected (**calibration process**)
 
-> * We want to perform **two different sets of simulations** to inspect how many simulations are needed to retrieve the estimated demographic history: i) **simulating 1,000 PODs**; ii) simulating **100,000 PODs**. :warning: However, here we are going to run only the first (simu.hgdp_1000) of the two simulation experiments for a matter of time. Instead, we will use the precomputed files with the 100,000 simulations.
+> * We want to perform **two different sets of simulations** to inspect how many simulations are needed to retrieve the estimated demographic history: i) **simulating 1,000 PODs**; ii) simulating **100,000 PODs**.
 
-8.1. **Simulate 1,000** Pseudo Observed Data (PODs) **in the cluster**:
+> [!Warning]
+> * However, here we are going to run only the first (simu.hgdp_1000) of the two simulation experiments for a matter of time. Instead, we will use the precomputed files with the 100,000 simulations.
 
-:warning: Copy the text only until install.packages. It will ask you:
-	* Would you like to use a personal library instead? yes
-	* Would you like to create a personal library‘~/R/x86_64-pc-linux-gnu-library/4.1’ to install packages into? yes
-	* Secure CRAN mirrors
-Then you can load the packages after installing	
-		
-```bash
-#In the scripts subfolder
-module load r-mvtnorm
+8.1. **Simulate 1,000** Pseudo Observed Data (PODs):
 
-# directories
-INPUT=../input
-cd $INPUT
+In **R**
 
-#Start a new R session
-R
-
-#Install packages
-install.packages(c("corrplot", "ape", "geigen", "mvtnorm"))
-
-#Load the packages
-require(corrplot); require(ape); require(geigen);require(mvtnorm)
-source("/opt/ohpc/pub/apps/BayPass/2.3/utils/baypass_utils.R")
+```R
+source(/baypass_utils.R")
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution obtained when running the CORE Model
 pi.beta.coef=read.table("hgdp_core_s1_summary_beta_params.out",h=T)$Mean
@@ -294,9 +281,8 @@ omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
 #Simulated 1000 PODs
 simu.hgdp_1000 <- simulate.baypass(omega.mat=omega_s1, nsnp=1000, 
     sample.size=hgdp.data$NN, beta.pi=pi.beta.coef, pi.maf=0, suffix="hgdp_pods_1000")
-
-#Close R session
 q()
+```
 
 cd ../scripts
 ```
