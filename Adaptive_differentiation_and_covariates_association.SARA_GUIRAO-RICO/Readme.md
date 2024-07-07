@@ -212,6 +212,7 @@ plot(hgdp_s1.snp.res$log10.1.pval.,ylab=expression('XtXst '*italic(P)*'-value (-
 	abline(h=3,lty=2) #correspods to a P-value theshold = 0.001
 dev.off()
 ```
+
 ```diff
 - QUESTION: Where are the two putative outliers (red and blue points)?
 ```
@@ -257,7 +258,7 @@ sum(qvals < 0.001)
 Here, we are going to **simulate data (PODs)** using the R function simulate.baypass() in the baypass_utils.R script (provided in the BayPass package). PODs are simulated under the inference model (e.g., using posterior estimates of the covariance matrix and the a and b parameters of the beta prior distribution for the overall (across population) SNP allele frequencies).
 Once these PODS are simulated, we need to **run again the CORE Model with the PODs as input** to built the \"expected\" distribution of the XtX values under the inference model in order to find which of the observed XtX values are significantly different from the expected (**calibration process**)
 
-> * We want to perform **two different sets of simulations** to inspect how many simulations are needed to retrieve the estimated demographic history: i) **simulating 1,000 PODs**; ii) simulating **100,000 PODs**.
+> We want to perform **two different sets of simulations** to inspect how many simulations are needed to retrieve the estimated demographic history: i) **simulating 1,000 PODs**; ii) simulating **100,000 PODs**.
 
 > [!Warning]
 > * However, here we are going to run only the first (simu.hgdp_1000) of the two simulation experiments for a matter of time. Instead, we will use the precomputed files with the 100,000 simulations.
@@ -289,36 +290,18 @@ cd ../scripts
 
 > * The G.hgdp_pods_1000 file is now the new genotype input file resulting from the simulation process.  
 
-8.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) by submit the job script "run_core_1000_simulations.sh" using the **sbatch command**:
+8.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) using the script "run_core_1000_simulations.sh":
 
 ```bash
-#In the scripts	subfolder
-sbatch run_core_1000_simulations.sh 
+bash script/run_core_1000_simulations.sh 
 ```
 > * This is the code to run the "run_core_1000_simulations.sh" script
 
 ```bash
-#!/bin/bash                                                                                                             
-
-# define names                                                                                                          
-#SBATCH --job-name=bp_core_1000_sim                                                                                         
-#SBATCH --error bp_core_1000_sim-%j.err                                                                                     
-#SBATCH --output bp_core_1000_sim-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
+#!/bin/bash                                                                                                                         
 
 # run BayPass (CORE Model) with the 1,000 PODs as input
-g_baypass -npop 52 -gfile G.hgdp_pods_1000 -nthreads 8 -outprefix hgdp_pod_1000 
-```
+../software/baypass_public/source/g_baypass -npop 52 -gfile ../input/G.hgdp_pods_1000 -outprefix hgdp_pod_1000 
 
 :warning: For the second set of simulations, we are going to **use the precomputed files** resulting from running the CORE Model with the 100,000 simulations as input.
 
