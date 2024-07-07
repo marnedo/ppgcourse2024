@@ -8,7 +8,7 @@ In this practical class we will try to identify human **SNPs with evidences of l
 These **two SNPs** have been previously reported to be **under positive selection in European populations** and are located in genes (ERC2 and TYR) involved in **light skin and eye color** (Wilde et al.2014).
 * The covariates (geographical variables) explored are **latitude**, **longitude** and a categorical variable with value = 1 if the population is **European** and -1 if is not.
 
->[!Warning]
+> [!Warning]
 > Note that even we are performing the analysis with a very reduce dataset, the time it takes to run some of the models is above the available time in this practice and therefore, in some cases, we will use some of the results previously obtained (**precomputed results**) to calculate some of the statistics or to plot them using R.
 
 ## Working space
@@ -57,14 +57,14 @@ To run this model (using allele count data) you will need:
 
 1. Run BayPass under the **CORE Model**
  
-> [[!Warning]
-> The **CORE model** should be run with **three different seeds** by submit the jobs' scripts "run_core_model_seed1.sh", "run_core_model_seed2.sh" and "run_core_model_seed3.sh" using the **sbatch command** but **here we are going to run it only with one** for a matter of time:
+> [!Warning]
+> The **CORE model** should be run with **three different seeds** by executing the script "run_core_model_seed1.sh", "run_core_model_seed2.sh" and "run_core_model_seed3.sh" but **here we are going to run it only with one** for a matter of time:
 
 ```bash
 #Run the CORE Model from the scripts subfolder
-sbatch  run_core_model_seed1.sh
-#sbatch  run_core_model_seed2.sh
-#sbatch  run_core_model_seed3.sh
+bash run_core_model_seed1.sh
+#bash run_core_model_seed2.sh
+#bash  run_core_model_seed3.sh
 ```
 > * This is the code to run the "run_core_model_seed1.sh" script:
 
