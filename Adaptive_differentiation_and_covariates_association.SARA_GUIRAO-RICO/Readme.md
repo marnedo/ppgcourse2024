@@ -77,10 +77,9 @@ bash ./scripts/run_core_model_seed1.sh
 > * It takes ~ 6 mins each one
 > * This will generate 7 files for each seed.
 
-
 2. **Sanity Check**. 
 
-3.1. **In an R session**, we can compare the omega matrices obtained under the CORE Model when using different seeds to check consistency in the estimation of parameters of the model.
+2.1. **In an R session**, we can compare the omega matrices obtained under the CORE Model when using different seeds to check consistency in the estimation of parameters of the model.
 
 ```R
 source("baypass_utils.R")
@@ -99,7 +98,7 @@ dev.off()
 - QUESTION: Are they similar?
 ```
 
-3.2. Compute the **distances between pairs of omegas** to **check consistency*** in the estimation of parameters of the model.
+2.2. Compute the **distances between pairs of omegas** to **check consistency*** in the estimation of parameters of the model.
 
 ```R
 dist.12=fmd.dist(omega_s1, omega_s2)
@@ -116,9 +115,9 @@ dist.23
 
 > * If the omegas are not significantly different we can assume that there is consistency in the parameters estimation and hence, you should choose one of the omegas to perform the subsequent analyses (e.g., omega 1).
 
-4. **Visualization** of the shared history of populations (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+3. **Visualization** of the shared history of populations (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
-4.1. Explore the **shared history of populations** by transforming the omega covariance matrix into a **correlation matrix** using the R function cov2cor().
+3.1. Explore the **shared history of populations** by transforming the omega covariance matrix into a **correlation matrix** using the R function cov2cor().
 
 ```R
 #Setup the population names for the omega matrix:
@@ -138,7 +137,7 @@ corrplot(cor.mat_s1, method="color",mar=c(2,1,2,2)+0.1,
 dev.off()
 ```
 
-4.2. Explore the **shared history of populations** by transforming the correlation matrix into a **hierarchical clustering tree** using the R function hclust().
+3.2. Explore the **shared history of populations** by transforming the correlation matrix into a **hierarchical clustering tree** using the R function hclust().
 
 ```R
 #Transform the correlation matrix into a hierarchical clustering tree
@@ -152,7 +151,7 @@ plot(hgdp.tree_s1, type="p",
 dev.off()
 ```
 
-4.3. Explore the **shared history of populations** by performing a **heatmap and hierarchical clustering tree** (using the average agglomeration method). 
+3.3. Explore the **shared history of populations** by performing a **heatmap and hierarchical clustering tree** (using the average agglomeration method). 
 
 ```R
 pdf(file="omega_heatmap.pdf")
@@ -161,7 +160,8 @@ heatmap(1-cor.mat_s1,hclustfun = hclust.ave,
 	main=expression("Heatmap of "~hat(Omega)~"("*d[ij]*"=1-"*rho[ij]*")"))
 dev.off()
 ```
-4.4. Explore the **shared history of populations** by performing an eigen-decomposition of the scaled covariance matrix of the population allele frequencies to allow representation in a two-dimension plot. This actually corresponds to a (between population) **PCA–like analysis** (**R in your laptop**).
+
+3.4. Explore the **shared history of populations** by performing an eigen-decomposition of the scaled covariance matrix of the population allele frequencies to allow representation in a two-dimension plot. This actually corresponds to a (between population) **PCA–like analysis** (**R in your laptop**).
 
 ```R
 pdf(file="omega_PCA-like.pdf")
@@ -172,7 +172,7 @@ dev.off()
 ```
 > * If you want to modify the size of the text you should modify the baypass_utils.R script
 
-5. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**)
+4. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**)
 
 ```R
 #Read the XtX file:
@@ -191,7 +191,7 @@ dev.off()
 - QUESTION: Which are the XtXst outliers? How many there are? Do we need to perform a test to know how many of them are significant?
 ```
 
-6. **Check behavior of the *P*-values** associated to the XtXst estimator (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+5. **Check behavior of the *P*-values** associated to the XtXst estimator (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 pdf("omega_XtXst_pvals_hist.pdf")
@@ -219,7 +219,7 @@ dev.off()
 - QUESTION: Where are the two putative outliers (red and blue points)?
 ```
 
-6.1. Inspect the *P*-values associated two the two putative outliers.
+5.1. Inspect the *P*-values associated two the two putative outliers.
 
 ```R
 #Inspect the P-values associated two the two putative outliers
@@ -231,7 +231,7 @@ hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2335, ]$log10.1.pval.
 - QUESTION: Which XtXst values are significant?
 ```
 
-7. **Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+6. **Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 #Install the "qvalue" R package
@@ -255,7 +255,7 @@ sum(qvals < 0.001)
 ```
 > * In case the *P*-values of the XtXst do not behave well, you will need to perform "neutral" simulations (Pseudo Observed Data –PODs–).
 
-8. Pseudo Observed Data (PODs) 
+7. Pseudo Observed Data (PODs) 
 
 Here, we are going to **simulate data (PODs)** using the R function simulate.baypass() in the baypass_utils.R script (provided in the BayPass package). PODs are simulated under the inference model (e.g., using posterior estimates of the covariance matrix and the a and b parameters of the beta prior distribution for the overall (across population) SNP allele frequencies).
 Once these PODS are simulated, we need to **run again the CORE Model with the PODs as input** to built the \"expected\" distribution of the XtX values under the inference model in order to find which of the observed XtX values are significantly different from the expected (**calibration process**)
@@ -265,7 +265,7 @@ Once these PODS are simulated, we need to **run again the CORE Model with the PO
 > [!Warning]
 > * However, here we are going to run only the first (simu.hgdp_1000) of the two simulation experiments for a matter of time. Instead, we will use the precomputed files with the 100,000 simulations.
 
-8.1. **Simulate 1,000** Pseudo Observed Data (PODs):
+7.1. **Simulate 1,000** Pseudo Observed Data (PODs):
 
 In **R**
 
@@ -289,7 +289,7 @@ q()
 
 > * The G.hgdp_pods_1000 file is now the new genotype input file resulting from the simulation process.  
 
-8.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) using the script "run_core_1000_simulations.sh":
+7.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) using the script "run_core_1000_simulations.sh":
 
 ```bash
 bash script/run_core_1000_simulations.sh 
@@ -306,7 +306,7 @@ bash script/run_core_1000_simulations.sh
 > [!Warning]
 > For the second set of simulations, we are going to **use the precomputed files** resulting from running the CORE Model with the 100,000 simulations as input.
   
-8.3. **Sanity Check**.
+7.3. **Sanity Check**.
 
 Here, we are **comparing the simulated data (PODS)** under the inference model **to the observed data** to assess if the inference model (posterior distributions for the covariance matrix and the other hyperparameters) is giving us \"valid\" predictions about the \"reality\". In other words, if the model we have inferred is able to generate data similar results to those observed and in case of yes, how many simulations are needed.
 
@@ -483,9 +483,9 @@ dev.off()
 - QUESTION: How many significant SNPs are correlating with any of the covariates? based on what creiteria, BF or eBPis? Are all of them correlating in the same way?
 ```
 
-4. **Calibrate** the STDis Parameters (BF, the eBPis and the correlation coefficients) using PODs.
+3. **Calibrate** the STDis Parameters (BF, the eBPis and the correlation coefficients) using PODs.
 
-4.1. **Simulate 10,000 PODs** using script "run_10000_simulations.sh".
+3.1. **Simulate 10,000 PODs** using script "run_10000_simulations.sh".
 
 **In R**
 
@@ -509,7 +509,7 @@ simu.hgdp_10000 <- simulate.baypass(omega.mat=omega_s1, nsnp=10000,
 > [!Warning]
 > We are not running the part between the two :no_entry: symbols for a matter of time ( it takes about ~ 25 mins). Instead, we are going to use the precomputed files in the results folder
 
-4.2. Run STDis model with 10,000 PODS as input with the script "run_stdis_10000_simulations.sh" 
+3.2. Run STDis model with 10,000 PODS as input with the script "run_stdis_10000_simulations.sh" 
 
 ```bash
 bash scripts/run_stdis_10000_simulations.sh
@@ -523,7 +523,7 @@ bash scripts/run_stdis_10000_simulations.sh
 ../software/baypass_public/source/g_baypass -npop 52 -gfile ../imput/G.hgdp_pods_10000 -efile covariates -scalecov  -outprefix hgdp_stdis_10000_pods
 ```
 
-4.4. **Sanity check** (**R in your laptop**).
+3.3. **Sanity check**.
 
 ```R
 #Read the files resulting from running the CORE Model and from simulating PODs
@@ -550,7 +550,7 @@ plot(pod.pi.beta.coef_10000, pi.beta.coef, xlab="pi.beta from PODs",
 dev.off()
 ```
 
-4.5. **Calibrate** the BF, the eBPis and the correlation coefficients parameters.
+3.4. **Calibrate** the BF, the eBPis and the correlation coefficients parameters.
 
 ```R
 #Read the output file with the BF, eBPis and Beta correlation coefficients calculated from pods
@@ -682,49 +682,24 @@ To run this analysis (using allele count data) you will need:
 * To specify if you want to **scale covariables** (```-scalecov```)
 * A **prefix to name the output** (```-outprefix```)
  
-1. Run the **STDis and the Contrast Model** by submit the job script "run_stdis_contr_model.sh" using the **sbatch command**. 
+1. Run the **STDis and the Contrast Model** using the script "run_stdis_contr_model.sh". 
 
 ```bash
-#In the scripts subfolder
-sbatch run_stdis_contr_model.sh
+bash  scripts/run_stdis_contr_model.sh
 ```
 
 > * This is the code to run the "run_stdis_contr_model.sh" script
 
 ```bash
-#!/bin/bash                                                                                                             
-
-# define names                                                                                                          
-#SBATCH --job-name=bp_stdis_contr                                                                                         
-#SBATCH --error bp_stdis_contr-%j.err                                                                                     
-#SBATCH --output bp_stdis_contr-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
+#!/bin/bash                                                                                                              
 
 # run BayPass (STDis and Contrast Model)
-g_baypass -npop 52 -gfile hgdp.geno -contrastfile covariates_eu -efile covariates_eu -nthreads 8 -outprefix hgdp_contrast
+../software/baypass_public/source/g_baypass -npop 52 -gfile ../inputs/hgdp.geno -contrastfile covariates_eu -efile covariates_eu -outprefix hgdp_contrast
 ````
 > * It generates 9 output files.
 > * It takes about 6 mins.
 
-2. **Copy** the previously obtained results to the folder **my_results** in **your laptop**:
-
-```bash
-cd my_results
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/hgdp_contrast_* .
-
-```
-
-3. **Inspect** the obtained **results** (**R in your laptop**).
+2. **Inspect** the obtained **results**.
 
 ```R
 #Read the files with the BF and the C2
@@ -744,24 +719,14 @@ dev.off()
 - QUESTION: Are the C2 *P*-values behaving well?
 ```
 
-4. **Calibrate** C2 and BF statistics.
+3. **Calibrate** C2 and BF statistics.
 
-4.1. **Simulate 10,000 neutral PODs** by submit the job script "run_10000_c2_simulations.sh" **in the cluster**. 
+3.1. **Simulate 10,000 neutral PODs** using the script "run_10000_c2_simulations.sh". 
 
-```bash
-module load r-mvtnorm
+**In R**
 
-# directories
-INPUT=../input
-cd $INPUT
-
-#Start a new R session
-R
-
-#Install and load packages
-#install.packages(c("corrplot", "ape", "geigen", "mvtnorm"))
-require(corrplot); require(ape); require(geigen);require(mvtnorm)
-source("/opt/ohpc/pub/apps/BayPass/2.3/utils/baypass_utils.R")
+```R
+source("baypass_utils.R")
 
 #Get estimates (post. mean) of both the a_pi and b_pi parameters of the Pi Beta distribution
 c2.pi.beta.coef=read.table("hgdp_contrast_summary_beta_params.out",h=T)$Mean
@@ -776,18 +741,12 @@ omega_contrast=as.matrix(read.table(file="hgdp_contrast_mat_omega.out", header=F
 simu.C2.10000 <- simulate.baypass(omega.mat=omega_contrast,nsnp=10000,
 	sample.size=hgdp.data$NN, beta.pi=c2.pi.beta.coef, pi.maf=0, 
 	suffix="hgdp_C2_10000_pods")
-
-# close R session
-q()
-
-cd ../scripts
 ```
 
-4.2. Run the **STDis and contrast Models with the 10,000 PODs as input** by submit the job script "run_stdis_contrast_10000_simulations.sh" using the **sbatch command**.  
+3.2. Run the **STDis and contrast Models with the 10,000 PODs as input** using the script "run_stdis_contrast_10000_simulations.sh". 
 
 ```bash
-#In the scripts subfolder
-sbatch run_stdis_contrast_10000_simulations.sh
+bash scripts/run_stdis_contrast_10000_simulations.sh
 ```
 
 > * This is the code to run the "run_stdis_contrast_10000_simulations.sh" script:
@@ -795,38 +754,14 @@ sbatch run_stdis_contrast_10000_simulations.sh
 ```bash
 #!/bin/bash                                                                                                             
 
-# define names                                                                                                          
-#SBATCH --job-name=bp_stdis_contr                                                                                         
-#SBATCH --error bp_stdis_contr-%j.err                                                                                     
-#SBATCH --output bp_stdis_contr-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
-
 # run BayPass (CORE Model) with the 10000 c2 PODs as input
-g_baypass -npop 52 -gfile G.hgdp_C2_10000_pods -contrastfile covariates_eu -efile covariates_eu -nthreads 8 -outprefix hgdp_contrast_10000_pods 
+../software/baypass_public/source/g_baypass -npop 52 -gfile G.hgdp_C2_10000_pods -contrastfile covariates_eu -efile covariates_eu -outprefix hgdp_contrast_10000_pods 
 ```
 
 > * It generates 9 output files
 > * It takes about 20 mins
 
-4.3. **Copy** the previously obtained results to the folder **my_results** in **your laptop**.
-
-```bash
-cd my_results
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/*_contrast_10000* . 
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/*C2_10000* .
-```
-
-4.4. **Sanity Check** (**R in your laptop**).
+3.3. **Sanity Check**.
 
 ```R
 #Read the omega matrix from observed data:
@@ -849,7 +784,7 @@ plot(pod.c2.pi.beta.coef,c2.pi.beta.coef)
     abline(a=0,b=1)
 ```
 
-4.5. **Calibrate** the C2 and BF (**R in your laptop**).
+3.4. **Calibrate** the C2 and BF.
 
 ```R
 #Read the obtained results from real data
@@ -875,7 +810,7 @@ plot(covariates_eu.bf,covariates_eu.C2$M_C2,
 dev.off()
 ```
 
-4.6. **Plot** the observed C2 and BF for a matter of comparison (**R in your laptop**).
+3.5. **Plot** the observed C2 and BF for a matter of comparison (**R in your laptop**).
 
 ```R
 #Read the obtained results for the real data
@@ -894,6 +829,7 @@ plot(covariates_eu.bf,covariates_eu.C2$log10.1.pval.,
 		y=covariates_eu.C2[covariates_eu.C2[ ,2 ]==2335, ]$log10.1.pval., col="blue", pch=20)
 dev.off()
 ```
+
 ```diff
 - QUESTION: How many SNPs are significant before and after calibrating the C2 statistic using PODs? and how many after calibrating the BF?
 ```
