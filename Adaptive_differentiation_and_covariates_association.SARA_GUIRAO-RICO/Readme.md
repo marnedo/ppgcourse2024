@@ -285,9 +285,6 @@ simu.hgdp_1000 <- simulate.baypass(omega.mat=omega_s1, nsnp=1000,
 q()
 ```
 
-cd ../scripts
-```
-
 > * The G.hgdp_pods_1000 file is now the new genotype input file resulting from the simulation process.  
 
 8.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) using the script "run_core_1000_simulations.sh":
@@ -302,24 +299,16 @@ bash script/run_core_1000_simulations.sh
 
 # run BayPass (CORE Model) with the 1,000 PODs as input
 ../software/baypass_public/source/g_baypass -npop 52 -gfile ../input/G.hgdp_pods_1000 -outprefix hgdp_pod_1000 
-
-:warning: For the second set of simulations, we are going to **use the precomputed files** resulting from running the CORE Model with the 100,000 simulations as input.
-
-8.3. **Copy** the previously obtained results and also those precomputed for 100,000 PODs to the folder **my_results** in **your laptop**:
-
-```bash
-cd my_results
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/G.hgdp_pods_1000 .
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/hgdp_pod_1000_* .
-
-cd my_results
-scp ../results/CORE_Model/simulations/100000/*_100000* .
 ```
-  
-8.3. **Sanity Check** (**R in your laptop**).
 
-Here, we are **comparing the simulated data (PODS)** under the inference model **to the observed data** to assess if the inference model (posterior distributions for the covariance matrix and the other hyperparameters) is giving us \"valid\" predictions about the \"reality\".
-In other words, if the model we have inferred is able to generate data similar results to those observed and in case of yes, how many simulations are needed.
+> [!Warning]
+> For the second set of simulations, we are going to **use the precomputed files** resulting from running the CORE Model with the 100,000 simulations as input.
+  
+8.3. **Sanity Check**.
+
+Here, we are **comparing the simulated data (PODS)** under the inference model **to the observed data** to assess if the inference model (posterior distributions for the covariance matrix and the other hyperparameters) is giving us \"valid\" predictions about the \"reality\". In other words, if the model we have inferred is able to generate data similar results to those observed and in case of yes, how many simulations are needed.
+
+**In R**
 
 ```R
 #Get the omega estimated from the PODs:
@@ -372,9 +361,11 @@ plot(pod.pi.beta.coef_100000, pi.beta.coef, xlab="pi.beta from PODs",
 	abline(a=0,b=1)
 dev.off()
 ```
+
 ```diff
 - QUESTION: Are the omega matrix distances between the observed data and those from the 1,000 and 100,000 PODs similar?
 ```
+
 ```diff
 - QUESTION: Where are the dots are falling in both sets of similations? What is the main difference when comparing the two simulation experiments (1,000 and 100,000 PODs) to the observed data?
 ```
