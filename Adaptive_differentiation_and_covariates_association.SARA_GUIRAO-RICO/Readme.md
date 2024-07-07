@@ -32,7 +32,7 @@ ghget https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiatio
 	*  input: genotype and covariate input data needed for the analysis. 
 	*  scripts: scripts to execute some of the BayPass models and to perform simulations (PODs).  
 
-2. Retrieve also the **precomputed results** (previously obtained results; for a matter of visualization or just in case we cannot compute them) and **download them in your laptop**
+### 2. Retrieve also the **precomputed results**
 
 ```bash
 scp -r username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets/BayPass/results .
@@ -40,7 +40,9 @@ scp -r username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets
 
 * The files in the results folder are classified in subfolders according to the model/process (e.g., CORE, STDis,...) and for each in turn, in simulations or plot subfolders.
 
-3. The "baypass_utils.R" file contains six R functions (R Core Team, 2015) (simulate.baypass(); plot.omega(); fmd.dist(); geno2YN() and simulate.PC.correlated.covariate() that may helpful to interpret some of the results obtained with BAYPASS.  
+### 3. The "baypass_utils.R" file 
+
+This file contains six R functions (R Core Team, 2015) (simulate.baypass(); plot.omega(); fmd.dist(); geno2YN() and simulate.PC.correlated.covariate() that may helpful to interpret some of the results obtained with BAYPASS.  
 
 Now you are ready to run BayPass.
 
