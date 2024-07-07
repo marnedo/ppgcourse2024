@@ -61,7 +61,6 @@ To run this model (using allele count data) you will need:
 > The **CORE model** should be run with **three different seeds** by executing the script "run_core_model_seed1.sh", "run_core_model_seed2.sh" and "run_core_model_seed3.sh" but **here we are going to run it only with one** for a matter of time:
 
 ```bash
-#Run the CORE Model from the scripts subfolder
 bash ./scripts/run_core_model_seed1.sh
 #bash ./scripts/run_core_model_seed2.sh
 #bash  ./scripts/run_core_model_seed3.sh
@@ -69,26 +68,10 @@ bash ./scripts/run_core_model_seed1.sh
 > * This is the code in "run_core_model_seed1.sh" script:
 
 ```
-#!/bin/bash                                                                                                             
-
-# define names                                                                                                          
-#SBATCH --job-name=bp_core_seed1                                                                                         
-#SBATCH --error bp_core_seed1-%j.err                                                                                     
-#SBATCH --output bp_core_seed1-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
+#!/bin/bas
 
 # run BayPass (CORE Model) with seed1
-g_baypass -npop 52 -gfile hgdp.geno -nthreads 8 -seed 15263 -outprefix hgdp_core_s1
+./software/baypass_public/sources/g_baypass -npop 52 -gfile hgdp.geno -seed 15263 -outprefix hgdp_core_s1
 ```
 > * To check if it is running, type: "squeue -u username"
 > * It takes ~ 6 mins each one
