@@ -137,6 +137,7 @@ corrplot(cor.mat_s1, method="color",mar=c(2,1,2,2)+0.1,
 		tl.cex=0.5)
 dev.off()
 ```
+
 4.2. Explore the **shared history of populations** by transforming the correlation matrix into a **hierarchical clustering tree** using the R function hclust().
 
 ```R
@@ -150,6 +151,7 @@ plot(hgdp.tree_s1, type="p",
 	cex=0.5)
 dev.off()
 ```
+
 4.3. Explore the **shared history of populations** by performing a **heatmap and hierarchical clustering tree** (using the average agglomeration method). 
 
 ```R
