@@ -489,7 +489,7 @@ dev.off()
 
 **In R**
 
-``R
+```R
 source("baypass_utils.R")
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution obtained when running the CORE Model
