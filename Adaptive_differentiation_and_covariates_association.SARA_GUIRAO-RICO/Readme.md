@@ -62,11 +62,11 @@ To run this model (using allele count data) you will need:
 
 ```bash
 #Run the CORE Model from the scripts subfolder
-bash run_core_model_seed1.sh
-#bash run_core_model_seed2.sh
-#bash  run_core_model_seed3.sh
+bash ./scripts/run_core_model_seed1.sh
+#bash ./scripts/run_core_model_seed2.sh
+#bash  ./scripts/run_core_model_seed3.sh
 ```
-> * This is the code to run the "run_core_model_seed1.sh" script:
+> * This is the code in "run_core_model_seed1.sh" script:
 
 ```
 #!/bin/bash                                                                                                             
