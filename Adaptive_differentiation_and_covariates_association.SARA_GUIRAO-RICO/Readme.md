@@ -21,7 +21,7 @@ Yoy can find teh executable binary of `BayPass` (g_baypass) is in the folder `./
 1. Retrieve the **input data** and the **scripts** for this session:  
  
 ```bash
-ghget export https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO
+ghget export https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO`
 ```
 
 * The folder has two main subfolders:
@@ -55,7 +55,8 @@ To run this model (using allele count data) you will need:
 
 1. Run BayPass under the **CORE Model**
  
-:warning: The **CORE model** should be run with **three different seeds** by submit the jobs' scripts "run_core_model_seed1.sh", "run_core_model_seed2.sh" and "run_core_model_seed3.sh" using the **sbatch command** but **here we are going to run it only with one** for a matter of time:
+> [[!Warning]
+> The **CORE model** should be run with **three different seeds** by submit the jobs' scripts "run_core_model_seed1.sh", "run_core_model_seed2.sh" and "run_core_model_seed3.sh" using the **sbatch command** but **here we are going to run it only with one** for a matter of time:
 
 ```bash
 #Run the CORE Model from the scripts subfolder
