@@ -18,7 +18,8 @@ Yoy can find teh executable binary of `BayPass` (g_baypass) is in the folder `./
  
 
 ## Data
-1. Retrieve the **input data** and the **scripts** for this session:  
+
+### 1. Retrieve the **input data** and the **scripts** for this session:  
  
 ```bash
 ghget https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO`
