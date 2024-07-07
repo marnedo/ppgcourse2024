@@ -390,43 +390,20 @@ To run this model (using allele count data) you will need:
 1. Run BayPass with the **STANDARD model importance sampling** by submit the job script "run_stdis_model.sh" using **the sbatch command**:
 
 ```bash
-#In the scripts subfolder
-sbatch run_stdis_model.sh
+bash run_stdis_model.sh
 ```
 > * This is the code to run the "run_stdis_model.sh" script
 
 ```bash
-#!/bin/bash                                                                                                             
-
-# define names                                                                                                          
-#SBATCH --job-name=bp_stdis                                                                                         
-#SBATCH --error bp_stdis-%j.err                                                                                     
-#SBATCH --output bp_stdis-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
+#!/bin/bash                                                                                                                         
 
 # run BayPass (STDis Model)
-g_baypass -npop 52 -gfile hgdp.geno -efile covariates -scalecov -nthreads 8 -outprefix hgdp_stdis
+../software/baypass_public/source/g_baypass -npop 52 -gfile ../input/hgdp.geno -efile covariates -scalecov -outprefix hgdp_stdis
 ```
 > * This generates 9 output files.
 > * It takes ~ 6 mins.
 
-2. **Copy** the previously obtained results to the folder **my_results** in **your laptop**:
-
-```bash
-cd my_results
-scp username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/home/username/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/hgdp_stdis_* .
-```
-3. **Inspect** the obtained **results** (**R in your laptop**).
+2. **Inspect** the obtained **results** (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 #Read the file with the BF, the eBPis and the correlation coefficients parameters
@@ -498,29 +475,18 @@ xlab="SNP",ylab=expression(beta~"coefficient"))
 	mtext("STDis MODEL: European origin",side=3,line=- 2,outer=TRUE)
 dev.off()
 ```
+
 ```diff
 - QUESTION: How many significant SNPs are correlating with any of the covariates? based on what creiteria, BF or eBPis? Are all of them correlating in the same way?
 ```
 
 4. **Calibrate** the STDis Parameters (BF, the eBPis and the correlation coefficients) using PODs.
 
-4.1. **Simulate 10,000 PODs** by submit the job script "run_10000_simulations.sh" **in the cluster**.
+4.1. **Simulate 10,000 PODs** using script "run_10000_simulations.sh".
 
-```bash
-module load r-mvtnorm
+**In R**
 
-# directories
-INPUT=../input
-cd $INPUT
-
-#Start a new R session
-R
-
-#Install packages
-#install.packages(c("corrplot", "ape", "geigen", "mvtnorm"))
-
-#Load packages
-require(corrplot); require(ape); require(geigen);require(mvtnorm)
+``R
 source("/opt/ohpc/pub/apps/BayPass/2.3/utils/baypass_utils.R")
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution obtained when running the CORE Model
@@ -535,13 +501,10 @@ omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
 #Generate 10,000 PODs
 simu.hgdp_10000 <- simulate.baypass(omega.mat=omega_s1, nsnp=10000,
 	sample.size= hgdp.data$NN, beta.pi=pi.beta.coef, pi.maf=0, suffix="hgdp_pods_10000")
-	
-# close R session
-q()
-
-cd ../scripts
 ```
-⚠️ We are not running the part between the two :no_entry: symbols for a matter of time ( it takes about ~ 25 mins). Instead, we are going to use the precomputed files in the results folder
+
+> [!Warning]
+> We are not running the part between the two :no_entry: symbols for a matter of time ( it takes about ~ 25 mins). Instead, we are going to use the precomputed files in the results folder
 
 4.2. Run STDis model with 10,000 PODS as input by submit the job script "run_stdis_10000_simulations.sh" using the **sbatch command**.
 
