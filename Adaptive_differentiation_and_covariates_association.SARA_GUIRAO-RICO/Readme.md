@@ -32,7 +32,7 @@ ghget https://github.com/ppgcourseUB/ppgcourse2023/trunk/Adaptive_differentiatio
 	*  input: genotype and covariate input data needed for the analysis. 
 	*  scripts: scripts to execute some of the BayPass models and to perform simulations (PODs).  
 
-### 2. Retrieve also the **precomputed results**
+### 2. Retrieve the **precomputed results**
 
 ```bash
 scp -r username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets/BayPass/results .
@@ -58,7 +58,7 @@ To run this model (using allele count data) you will need:
 
 > *  For more specifications see [BayPass manual](https://www1.montpellier.inra.fr/CBGP/software/baypass/files/BayPass_manual_2.3.pdf) 
 
-1. Run BayPass under the **CORE Model**
+### 1. Run BayPass under the **CORE Model**
  
 > [!Warning]
 > The **CORE model** should be run with **three different seeds** by executing the script "run_core_model_seed1.sh", "run_core_model_seed2.sh" and "run_core_model_seed3.sh" but **here we are going to run it only with one** for a matter of time:
@@ -80,7 +80,7 @@ bash ./scripts/run_core_model_seed1.sh
 > * It takes ~ 6 mins each one
 > * This will generate 7 files for each seed.
 
-2. **Sanity Check**. 
+### 2. **Sanity Check**. 
 
 2.1. **In an R session**, we can compare the omega matrices obtained under the CORE Model when using different seeds to check consistency in the estimation of parameters of the model.
 
@@ -118,7 +118,7 @@ dist.23
 
 > * If the omegas are not significantly different we can assume that there is consistency in the parameters estimation and hence, you should choose one of the omegas to perform the subsequent analyses (e.g., omega 1).
 
-3. **Visualization** of the shared history of populations (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+### 3. **Visualization** of the shared history of populations (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 3.1. Explore the **shared history of populations** by transforming the omega covariance matrix into a **correlation matrix** using the R function cov2cor().
 
