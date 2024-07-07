@@ -1,4 +1,4 @@
-# Adaptive differentiation and_covariates association
+# Adaptive differentiation and covariates association
 
 Instructor: Sara Guirao Rico
 
