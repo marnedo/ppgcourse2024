@@ -108,9 +108,6 @@ dev.off()
 2.2. Compute the **distances between pairs of omegas** to **check consistency*** in the estimation of parameters of the model.
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 dist.12=fmd.dist(omega_s1, omega_s2)
 dist.13=fmd.dist(omega_s1, omega_s3)
 dist.23=fmd.dist(omega_s2, omega_s3)
@@ -130,9 +127,6 @@ dist.23
 3.1. Explore the **shared history of populations** by transforming the omega covariance matrix into a **correlation matrix** using the R function cov2cor().
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 #Setup the population names for the omega matrix:
 pop.names=c("Papuan","Melanesian","Surui","Pima","Maya","Karitiana","Columbian","Yi","Yaku","Xibo","Uygur","Tujia","Tu","She","Orogen","Naxi","Mongolia","Miao","Lahu","Japanese","Hezhen","Han","Daur",
 "Dal","Cambodian","Sindhi","Pathan","Makrani","Kalash","Hazara","Burusho","Brahui","Balochi","Palestinian","Mozabite","Druze","Bedouin","Tuscan","Sardinian","Russian","Orcadian","French","Italian","Basque",
@@ -153,9 +147,6 @@ dev.off()
 3.2. Explore the **shared history of populations** by transforming the correlation matrix into a **hierarchical clustering tree** using the R function hclust().
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 #Transform the correlation matrix into a hierarchical clustering tree
 hgdp.tree_s1=as.phylo(hclust(as.dist(1-cor.mat_s1**2)))
 
@@ -170,9 +161,6 @@ dev.off()
 3.3. Explore the **shared history of populations** by performing a **heatmap and hierarchical clustering tree** (using the average agglomeration method). 
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 pdf(file="omega_heatmap.pdf")
 hclust.ave <- function(x) hclust(x, method="average")
 heatmap(1-cor.mat_s1,hclustfun = hclust.ave,
@@ -183,9 +171,6 @@ dev.off()
 3.4. Explore the **shared history of populations** by performing an eigen-decomposition of the scaled covariance matrix of the population allele frequencies to allow representation in a two-dimension plot. This actually corresponds to a (between population) **PCA–like analysis** (**R in your laptop**).
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 pdf(file="omega_PCA-like.pdf")
 plot.omega(omega_s1,PC=c(1,2),pop.names=pop.names,
 	main=expression("SVD of "*Omega),
@@ -197,9 +182,6 @@ dev.off()
 4. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**)
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 #Read the XtX file:
 hgdp_s1.snp.res=read.table("hgdp_core_s1_summary_pi_xtx.out",h=T)
 head(hgdp_s1.snp.res)
@@ -219,9 +201,6 @@ dev.off()
 5. **Check behavior of the *P*-values** associated to the XtXst estimator (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 pdf("omega_XtXst_pvals_hist.pdf")
 hist(10**(-1*hgdp_s1.snp.res$log10.1.pval.),freq=F,breaks=50, 
     main=expression('XtXst '*italic(P)*'-value distribution'), 
@@ -250,9 +229,6 @@ dev.off()
 5.1. Inspect the *P*-values associated two the two putative outliers.
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 #Inspect the P-values associated two the two putative outliers
 hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2334, ]$log10.1.pval.
 hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2335, ]$log10.1.pval.
@@ -265,13 +241,6 @@ hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2335, ]$log10.1.pval.
 6. **Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
-#Install the "qvalue" R package
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-BiocManager::install("qvalue")
 library("qvalue")
 
 #Get the XtXst P-values
@@ -304,9 +273,6 @@ Once these PODS are simulated, we need to **run again the CORE Model with the PO
 In **R**
 
 ```R
-setwd("./results_core")
-source("../baypass_utils.R")
-
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution obtained when running the CORE Model
 pi.beta.coef=read.table("hgdp_core_s1_summary_beta_params.out",h=T)$Mean
 
