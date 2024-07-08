@@ -88,6 +88,8 @@ mkdir results_core
 ```R
 setwd("./results_core")
 source("../baypass_utils.R")
+require(corrplot); require(ape); require(geigen); require(mvtnorm)
+
 #Read omegas obtained from running the CORE Model with three different seeds
 omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
 omega_s2=as.matrix(read.table(file="hgdp_core_s2_mat_omega.out", header=F))
