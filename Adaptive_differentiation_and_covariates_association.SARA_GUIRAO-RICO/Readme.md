@@ -277,7 +277,7 @@ In **R**
 pi.beta.coef=read.table("hgdp_core_s1_summary_beta_params.out",h=T)$Mean
 
 #Upload the original data to obtain total allele count (sample size for each population). Do this by using the geno2YN() function in baypass_utils.R script
-hgdp.data<-geno2YN("hgdp.geno")
+hgdp.data<-geno2YN("../input/hgdp.geno")
 
 #Read the omega matrix from seed1 obtained from running the CORE Model:
 omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
@@ -298,10 +298,11 @@ bash script/run_core_1000_simulations.sh
 > * This is the code to run the "run_core_1000_simulations.sh" script
 
 ```bash
-#!/bin/bash                                                                                                                         
+#!/bin/bash
 
+mkdir simulations_core                                                                                                                        
 # run BayPass (CORE Model) with the 1,000 PODs as input
-../software/baypass_public/source/g_baypass -npop 52 -gfile ../input/G.hgdp_pods_1000 -outprefix hgdp_pod_1000 
+../software/baypass_public/source/g_baypass -npop 52 -gfile ./input/G.hgdp_pods_1000 -outprefix ./simulations_core/hgdp_pod_1000 
 ```
 
 > [!Warning]
