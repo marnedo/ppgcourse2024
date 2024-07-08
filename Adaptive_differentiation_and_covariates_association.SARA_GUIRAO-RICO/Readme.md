@@ -71,7 +71,7 @@ bash ./scripts/run_core_model_seed1.sh
 > * This is the code in "run_core_model_seed1.sh" script:
 
 ```
-#!/bin/bas
+#!/bin/bash
 
 # run BayPass (CORE Model) with seed1
 mkdir results_core
