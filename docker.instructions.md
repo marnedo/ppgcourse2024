@@ -24,7 +24,7 @@ https://docs.docker.com/get-docker/
 
 The image has been primarily tested on Ubuntu Linux as Host OS.
 
-`docker pull ppgcourseub/ppg2024:v1.1`
+`docker pull ppgcourseub/ppg24:latest`
 
 **Updated tag!**
 
