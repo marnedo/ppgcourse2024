@@ -179,7 +179,7 @@ dev.off()
 ```
 > * If you want to modify the size of the text you should modify the baypass_utils.R script
 
-4. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**)
+### 4. Explore the values of the **XtXst statistic** (~Fst) obtained under the CORE Model (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**)
 
 ```R
 #Read the XtX file:
@@ -198,7 +198,7 @@ dev.off()
 - QUESTION: Which are the XtXst outliers? How many there are? Do we need to perform a test to know how many of them are significant?
 ```
 
-5. **Check behavior of the *P*-values** associated to the XtXst estimator (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+### 5. Check behavior of the *P*-values** associated to the XtXst estimator (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 pdf("omega_XtXst_pvals_hist.pdf")
@@ -238,7 +238,7 @@ hgdp_s1.snp.res[hgdp_s1.snp.res[,1] == 2335, ]$log10.1.pval.
 - QUESTION: Which XtXst values are significant?
 ```
 
-6. **Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+### 6. Correct by False Discovery Rate (FDR)** by transforming the *P*-values into *q*-values (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 library("qvalue")
@@ -258,7 +258,7 @@ sum(qvals < 0.001)
 ```
 > * In case the *P*-values of the XtXst do not behave well, you will need to perform "neutral" simulations (Pseudo Observed Data –PODs–).
 
-7. Pseudo Observed Data (PODs) 
+### 7. Pseudo Observed Data (PODs) 
 
 Here, we are going to **simulate data (PODs)** using the R function simulate.baypass() in the baypass_utils.R script (provided in the BayPass package). PODs are simulated under the inference model (e.g., using posterior estimates of the covariance matrix and the a and b parameters of the beta prior distribution for the overall (across population) SNP allele frequencies).
 Once these PODS are simulated, we need to **run again the CORE Model with the PODs as input** to built the \"expected\" distribution of the XtX values under the inference model in order to find which of the observed XtX values are significantly different from the expected (**calibration process**)
@@ -394,7 +394,7 @@ To run this model (using allele count data) you will need:
 * To specify if you want to **scale** covariables (```-scalecov```)
 * **A prefix to name the output** (```-outprefix```)
 
-1. Run BayPass with the **STANDARD model importance sampling** by submit the job script "run_stdis_model.sh" using **the sbatch command**:
+### 1. Run BayPass with the STANDARD model importance sampling** by submit the job script "run_stdis_model.sh" using **the sbatch command:
 
 ```bash
 bash run_stdis_model.sh
@@ -411,7 +411,7 @@ bash run_stdis_model.sh
 > * This generates 9 output files.
 > * It takes ~ 6 mins.
 
-2. **Inspect** the obtained **results** (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
+### 2. Inspect the obtained **results** (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
 setwd("./results_core")
@@ -491,7 +491,7 @@ dev.off()
 - QUESTION: How many significant SNPs are correlating with any of the covariates? based on what creiteria, BF or eBPis? Are all of them correlating in the same way?
 ```
 
-3. **Calibrate** the STDis Parameters (BF, the eBPis and the correlation coefficients) using PODs.
+### 3. Calibrate the STDis Parameters (BF, the eBPis and the correlation coefficients) using PODs.
 
 3.1. **Simulate 10,000 PODs** using script "run_10000_simulations.sh".
 
