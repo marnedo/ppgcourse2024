@@ -1,20 +1,5 @@
-#!/bin/bash                                                                                                             
+#!/bin/bash
 
-# define names                                                                                                          
-#SBATCH --job-name=bp_core_1000_sim                                                                                         
-#SBATCH --error bp_core_1000_sim-%j.err                                                                                     
-#SBATCH --output bp_core_1000_sim-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
-
-# run BayPass (CORE Model) with the 1000 PODs as input
-g_baypass -npop 52 -gfile G.hgdp_pods_1000 -nthreads 8 -outprefix hgdp_pod_1000 
+mkdir simulations_core                                                                                                                        
+# run BayPass (CORE Model) with the 1,000 PODs as input
+../software/baypass_public/source/g_baypass -npop 52 -gfile ./input/G.hgdp_pods_1000 -outprefix ./simulations_core/hgdp_pod_1000
