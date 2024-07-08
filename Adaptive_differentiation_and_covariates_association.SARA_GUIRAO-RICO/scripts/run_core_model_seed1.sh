@@ -1,4 +1,4 @@
-#!/bin/bas
+#!/bin/bash
 
 # run BayPass (CORE Model) with seed1
 mkdir results_core
