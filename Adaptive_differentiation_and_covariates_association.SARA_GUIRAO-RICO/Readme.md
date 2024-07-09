@@ -30,17 +30,12 @@ ghget https://github.com/ppgcourseUB/ppgcourse2024/tree/main/Adaptive_differenti
 * The folder has two main subfolders:
 
 	*  input: genotype and covariate input data needed for the analysis. 
-	*  scripts: scripts to execute some of the BayPass models and to perform simulations (PODs).  
+	*  scripts: scripts to execute some of the BayPass models and to perform simulations (PODs).
+ 	*  precomputed_results: folder with three different subfolders with precomputed results.
 
-### 2. Retrieve the **precomputed results**
+* The files in the precomputed_results folder are classified in subfolders according to the model/process (e.g., CORE, STDis,...) and for each, in turn, in simulations or plot subfolders.
 
-```bash
-scp -r username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets/BayPass/results .
-```
-
-* The files in the results folder are classified in subfolders according to the model/process (e.g., CORE, STDis,...) and for each, in turn, in simulations or plot subfolders.
-
-### 3. The "baypass_utils.R" file 
+### 2. The "baypass_utils.R" file 
 
 This file contains six R functions (R Core Team, 2015) (simulate.baypass(); plot.omega(); fmd.dist(); geno2YN() and simulate.PC.correlated.covariate() that may helpful to interpret some of the results obtained with BAYPASS.  
 
@@ -92,8 +87,8 @@ require(corrplot); require(ape); require(geigen); require(mvtnorm)
 
 #Read omegas obtained from running the CORE Model with three different seeds
 omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
-omega_s2=as.matrix(read.table(file="hgdp_core_s2_mat_omega.out", header=F))
-omega_s3=as.matrix(read.table(file="hgdp_core_s3_mat_omega.out", header=F))
+omega_s2=as.matrix(read.table(file="/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_core/hgdp_core_s2_mat_omega.out", header=F))
+omega_s3=as.matrix(read.table(file="/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_core/hgdp_core_s3_mat_omega.out", header=F))
 
 #Plot the comparison between omega-seed1 and omega-seed2:
 pdf(file="omega_s1_s2_comparison.pdf")
@@ -348,7 +343,7 @@ dev.off()
 
 ### For 100000 PODS
 #Get the omega estimated from the PODs:
-pod.omega_100000=as.matrix(read.table("hgdp_pod_100000_mat_omega.out"))
+pod.omega_100000=as.matrix(read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_core/hgdp_pod_100000_mat_omega.out"))
 
 #Plot the observed versus the simulated omegas:
 pdf(file="comparison_omega_obs_sim_100000_pods.pdf")
@@ -361,7 +356,7 @@ dev.off()
 fmd.dist(pod.omega_100000, omega_s1)
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution from the PODs:
-pod.pi.beta.coef_100000=read.table("hgdp_pod_100000_summary_beta_params.out",h=T)$Mean
+pod.pi.beta.coef_100000=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_core/hgdp_pod_100000_summary_beta_params.out",h=T)$Mean
 
 #Plot the observed versus the simulated pi.beta:
 pdf(file="comparison_pi.beta_obs_sim_100000_pods.pdf")
@@ -545,8 +540,8 @@ source("../baypass_utils.R")
 omega_s1=as.matrix(read.table(file="/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/results_core/hgdp_core_s1_mat_omega.out", header=F))
 pi.beta.coef=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/results_core/hgdp_core_s1_summary_beta_params.out",h=T)$Mean
 
-pod.omega_10000=as.matrix(read.table("hgdp_stdis_10000_pods_mat_omega.out"))
-pod.pi.beta.coef_10000=read.table("hgdp_stdis_10000_pods_summary_beta_params.out",h=T)$Mean
+pod.omega_10000=as.matrix(read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_standard/hgdp_stdis_10000_pods_mat_omega.out"))
+pod.pi.beta.coef_10000=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_standard/hgdp_stdis_10000_pods_summary_beta_params.out",h=T)$Mean
 
 #Plot the observed versus the simulated omegas:
 pdf(file="comparison_omega_obs_sim_10000_pods.pdf")
@@ -573,7 +568,7 @@ dev.off()
 hgdp_stdis.snp.res=read.table("hgdp_stdis_summary_betai_reg.out",h=T)
 
 #Read the output file with the BF, eBPis and Beta correlation coefficients calculated from pods
-hgdp_stdis_10000_pods_param=read.table("hgdp_stdis_10000_pods_summary_betai_reg.out",h=T)
+hgdp_stdis_10000_pods_param=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_standard/hgdp_stdis_10000_pods_summary_betai_reg.out",h=T)
  
 ### Calibrate the STDis parameters for Latitude
 #Compute the 1% threshold of BF
@@ -793,7 +788,7 @@ source("../baypass_utils.R")
 omega_contrast=as.matrix(read.table(file="hgdp_contrast_mat_omega.out", header=F))
 
 #Get estimate of omega from the PODs
-pod.c2.omega=as.matrix(read.table("hgdp_contrast_10000_pods_mat_omega.out"))
+pod.c2.omega=as.matrix(read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_stdis_contr/hgdp_contrast_10000_pods_mat_omega.out"))
 
 #Plot the observed versus the simulated omegas:
 pdf(file="comparison_omega_obs_sim_10000_pods.pdf")
@@ -808,7 +803,7 @@ fmd.dist(pod.c2.omega,omega_contrast)
 c2.pi.beta.coef=read.table("hgdp_contrast_summary_beta_params.out",h=T)$Mean
 
 #Get estimates (post. mean) of both the a_pi and b_pi parameters of the Pi Beta distribution from the POD analysis
-pod.c2.pi.beta.coef=read.table("hgdp_contrast_10000_pods_summary_beta_params.out",h=T)$Mean
+pod.c2.pi.beta.coef=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_stdis_contr/hgdp_contrast_10000_pods_summary_beta_params.out",h=T)$Mean
 
 #Plot the observed versus the simulated pi.beta:
 pdf(file="comparison_pi.beta_obs_sim_10000_pods.pdf")
@@ -832,8 +827,8 @@ covariates_eu.bf=read.table("hgdp_contrast_summary_betai_reg.out",h=T)$BF.dB.
 covariates_eu.C2=read.table("hgdp_contrast_summary_contrast.out",h=T)
 
 #Read the files with the simulated C2 and BF
-pod.c2_10000=read.table("hgdp_contrast_10000_pods_summary_contrast.out",h=T)
-pod.BF.10000=read.table("hgdp_contrast_10000_pods_summary_betai_reg.out",h=T)
+pod.c2_10000=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_stdis_contr/hgdp_contrast_10000_pods_summary_contrast.out",h=T)
+pod.BF.10000=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/precomputed_results/results_stdis_contr/hgdp_contrast_10000_pods_summary_betai_reg.out",h=T)
 
 #Compute the 1% threshold of BF
 pod.c2_10000_thresh=quantile(pod.c2_10000$M_C2,probs=0.99)
