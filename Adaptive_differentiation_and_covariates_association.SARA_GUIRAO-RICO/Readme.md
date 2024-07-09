@@ -538,9 +538,13 @@ bash scripts/run_stdis_10000_simulations.sh
 3.3. **Sanity check**.
 
 ```R
+setwd("./results_standard")
+source("../baypass_utils.R")
+
 #Read the files resulting from running the CORE Model and from simulating PODs
-#omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
-#pi.beta.coef=read.table("hgdp_core_s1_summary_beta_params.out",h=T)$Mean
+omega_s1=as.matrix(read.table(file="/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/results_core/hgdp_core_s1_mat_omega.out", header=F))
+pi.beta.coef=read.table("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/results_core/hgdp_core_s1_summary_beta_params.out",h=T)$Mean
+
 pod.omega_10000=as.matrix(read.table("hgdp_stdis_10000_pods_mat_omega.out"))
 pod.pi.beta.coef_10000=read.table("hgdp_stdis_10000_pods_summary_beta_params.out",h=T)$Mean
 
@@ -565,6 +569,9 @@ dev.off()
 3.4. **Calibrate** the BF, the eBPis and the correlation coefficients parameters.
 
 ```R
+#Read the file with the BF, the eBPis and the correlation coefficients parameters
+hgdp_stdis.snp.res=read.table("hgdp_stdis_summary_betai_reg.out",h=T)
+
 #Read the output file with the BF, eBPis and Beta correlation coefficients calculated from pods
 hgdp_stdis_10000_pods_param=read.table("hgdp_stdis_10000_pods_summary_betai_reg.out",h=T)
  
