@@ -407,7 +407,8 @@ bash run_stdis_model.sh
 #!/bin/bash                                                                                                                         
 
 # run BayPass (STDis Model)
-../software/baypass_public/source/g_baypass -npop 52 -gfile ../input/hgdp.geno -efile covariates -scalecov -outprefix hgdp_stdis
+mkdir results_standard
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -efile covariates -scalecov -outprefix ./results_standard/hgdp_stdis
 ```
 
 > * This generates 9 output files.
@@ -531,7 +532,7 @@ bash scripts/run_stdis_10000_simulations.sh
 #!/bin/bash                                                                                                             
 
 # run BayPass (CORE Model) with the 10000 PODs as input
-../software/baypass_public/source/g_baypass -npop 52 -gfile ../imput/G.hgdp_pods_10000 -efile covariates -scalecov  -outprefix hgdp_stdis_10000_pods
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/G.hgdp_pods_10000 -efile covariates -scalecov  -outprefix ./results_standard/hgdp_stdis_10000_pods
 ```
 
 3.3. **Sanity check**.
@@ -705,7 +706,8 @@ bash  scripts/run_stdis_contr_model.sh
 #!/bin/bash                                                                                                              
 
 # run BayPass (STDis and Contrast Model)
-../software/baypass_public/source/g_baypass -npop 52 -gfile ../inputs/hgdp.geno -contrastfile covariates_eu -efile covariates_eu -outprefix hgdp_contrast
+mkdir results_stdis_contr
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -contrastfile covariates_eu -efile covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast
 ````
 > * It generates 9 output files.
 > * It takes about 6 mins.
@@ -766,7 +768,7 @@ bash scripts/run_stdis_contrast_10000_simulations.sh
 #!/bin/bash                                                                                                             
 
 # run BayPass (CORE Model) with the 10000 c2 PODs as input
-../software/baypass_public/source/g_baypass -npop 52 -gfile G.hgdp_C2_10000_pods -contrastfile covariates_eu -efile covariates_eu -outprefix hgdp_contrast_10000_pods 
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/G.hgdp_C2_10000_pods -contrastfile covariates_eu -efile covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast_10000_pods 
 ```
 
 > * It generates 9 output files
