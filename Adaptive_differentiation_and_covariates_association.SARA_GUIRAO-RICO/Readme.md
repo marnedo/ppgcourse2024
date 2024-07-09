@@ -293,7 +293,7 @@ q()
 7.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) using the script "run_core_1000_simulations.sh":
 
 ```bash
-bash script/run_core_1000_simulations.sh 
+bash ../scripts/run_core_1000_simulations.sh 
 ```
 > * This is the code to run the "run_core_1000_simulations.sh" script
 
@@ -314,14 +314,13 @@ Here, we are **comparing the simulated data (PODS)** under the inference model *
 **In R**
 
 ```R
+setwd("./results_core")
 source("../baypass_utils.R")
 
 #Read the omega matrix from seed1 obtained from running the CORE Model: 
-setwd("./results_core")
 omega_s1=as.matrix(read.table(file="hgdp_core_s1_mat_omega.out", header=F))
 
 #Get the omega estimated from the PODs:
-setwd("../simulations_core")
 pod.omega_1000=as.matrix(read.table("hgdp_pod_1000_mat_omega.out"))
 
 #Plot the observed versus the simulated omegas:
@@ -335,7 +334,6 @@ dev.off()
 fmd.dist(pod.omega_1000, omega_s1)
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution obtained when running the CORE Model
-setwd("../results_core")
 pi.beta.coef=read.table("hgdp_core_s1_summary_beta_params.out",h=T)$Mean
 
 #Get estimates (posterior mean) of both the a_pi and b_pi parameters of the Pi Beta distribution from the PODs:
