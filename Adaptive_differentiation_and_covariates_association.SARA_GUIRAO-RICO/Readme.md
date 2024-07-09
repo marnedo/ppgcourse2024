@@ -714,7 +714,7 @@ bash  scripts/run_stdis_contr_model.sh
 
 # run BayPass (STDis and Contrast Model)
 mkdir results_stdis_contr
-../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -contrastfile covariates_eu -efile covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -contrastfile ./input/covariates_eu -efile ./input/covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast
 ````
 > * It generates 9 output files.
 > * It takes about 6 mins.
@@ -722,6 +722,8 @@ mkdir results_stdis_contr
 2. **Inspect** the obtained **results**.
 
 ```R
+setwd("./results_stdis_contr")
+
 #Read the files with the BF and the C2
 covariates_eu.bf=read.table("hgdp_contrast_summary_betai_reg.out",h=T)$BF.dB.
 covariates_eu.C2=read.table("hgdp_contrast_summary_contrast.out",h=T)
@@ -746,13 +748,14 @@ dev.off()
 **In R**
 
 ```R
-source("baypass_utils.R")
+setwd("./results_stdis_contr")
+source("../baypass_utils.R")
 
 #Get estimates (post. mean) of both the a_pi and b_pi parameters of the Pi Beta distribution
 c2.pi.beta.coef=read.table("hgdp_contrast_summary_beta_params.out",h=T)$Mean
 
 #Upload the original data to obtain total allele count
-hgdp.data<-geno2YN("hgdp.geno")
+hgdp.data<-geno2YN("/home/ppguser/Adaptive_differentiation_and_covariates_association.SARA_GUIRAO-RICO/input/hgdp.geno")
 
 #Read the omega matrix:
 omega_contrast=as.matrix(read.table(file="hgdp_contrast_mat_omega.out", header=F))
@@ -766,7 +769,7 @@ simu.C2.10000 <- simulate.baypass(omega.mat=omega_contrast,nsnp=10000,
 3.2. Run the **STDis and contrast Models with the 10,000 PODs as input** using the script "run_stdis_contrast_10000_simulations.sh". 
 
 ```bash
-bash scripts/run_stdis_contrast_10000_simulations.sh
+bash ./scripts//run_stdis_contrast_10000_simulations.sh
 ```
 
 > * This is the code to run the "run_stdis_contrast_10000_simulations.sh" script:
@@ -775,7 +778,7 @@ bash scripts/run_stdis_contrast_10000_simulations.sh
 #!/bin/bash                                                                                                             
 
 # run BayPass (CORE Model) with the 10000 c2 PODs as input
-../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/G.hgdp_C2_10000_pods -contrastfile covariates_eu -efile covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast_10000_pods 
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./results_stdis_contr/G.hgdp_C2_10000_pods -contrastfile ./input/covariates_eu -efile ./input/covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast_10000_pods 
 ```
 
 > * It generates 9 output files
