@@ -293,7 +293,7 @@ q()
 7.2. **Run again, the CORE Model** only with the first set of simulations (G.hgdp\_pods\_1000) using the script "run_core_1000_simulations.sh":
 
 ```bash
-bash ../scripts/run_core_1000_simulations.sh 
+bash ./scripts/run_core_1000_simulations.sh 
 ```
 > * This is the code to run the "run_core_1000_simulations.sh" script
 
@@ -399,7 +399,7 @@ To run this model (using allele count data) you will need:
 ### 1. Run BayPass with the STANDARD model importance sampling** by submit the job script "run_stdis_model.sh" using **the sbatch command:
 
 ```bash
-bash run_stdis_model.sh
+bash ./scripts/run_stdis_model.sh
 ```
 > * This is the code to run the "run_stdis_model.sh" script
 
@@ -524,7 +524,7 @@ simu.hgdp_10000 <- simulate.baypass(omega.mat=omega_s1, nsnp=10000,
 3.2. Run STDis model with 10,000 PODS as input with the script "run_stdis_10000_simulations.sh" 
 
 ```bash
-bash scripts/run_stdis_10000_simulations.sh
+bash ./scripts/run_stdis_10000_simulations.sh
 ```
 > * This is the code to run the "run_stdis_10000_simulations.sh" script:
 
@@ -704,14 +704,13 @@ To run this analysis (using allele count data) you will need:
 1. Run the **STDis and the Contrast Model** using the script "run_stdis_contr_model.sh". 
 
 ```bash
-bash  scripts/run_stdis_contr_model.sh
+bash  ./scripts/run_stdis_contr_model.sh
 ```
 
 > * This is the code to run the "run_stdis_contr_model.sh" script
 
 ```bash
 #!/bin/bash                                                                                                              
-
 # run BayPass (STDis and Contrast Model)
 mkdir results_stdis_contr
 ../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -contrastfile ./input/covariates_eu -efile ./input/covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast
@@ -769,7 +768,7 @@ simu.C2.10000 <- simulate.baypass(omega.mat=omega_contrast,nsnp=10000,
 3.2. Run the **STDis and contrast Models with the 10,000 PODs as input** using the script "run_stdis_contrast_10000_simulations.sh". 
 
 ```bash
-bash ./scripts//run_stdis_contrast_10000_simulations.sh
+bash ./scripts/run_stdis_contrast_10000_simulations.sh
 ```
 
 > * This is the code to run the "run_stdis_contrast_10000_simulations.sh" script:
