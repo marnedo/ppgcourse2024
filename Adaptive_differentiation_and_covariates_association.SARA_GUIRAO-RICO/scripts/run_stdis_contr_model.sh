@@ -1,20 +1,5 @@
-#!/bin/bash                                                                                                             
-
-# define names                                                                                                          
-#SBATCH --job-name=bp_stdis_contr                                                                                         
-#SBATCH --error bp_stdis_contr-%j.err                                                                                     
-#SBATCH --output bp_stdis_contr-%j.out                                                                                    
-
-# memory and CPUs request                                                                                               
-#SBATCH --mem=6G                                                                                                        
-#SBATCH --cpus-per-task=8 
-
-# directories
-INPUT=../input
-cd $INPUT
-
-# module load                                                                                                           
-module load BayPass   
+#!/bin/bash     
 
 # run BayPass (STDis and Contrast Model)
-g_baypass -npop 52 -gfile hgdp.geno -contrastfile covariates_eu -efile covariates_eu -nthreads 8 -outprefix hgdp_contrast
+mkdir results_stdis_contr
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -contrastfile ./input/covariates_eu -efile ./input/covariates_eu -outprefix ./results_stdis_contr/hgdp_contrast
