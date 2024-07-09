@@ -408,7 +408,7 @@ bash run_stdis_model.sh
 
 # run BayPass (STDis Model)
 mkdir results_standard
-../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -efile covariates -scalecov -outprefix ./results_standard/hgdp_stdis
+../software/baypass_public/sources/g_baypass -npop 52 -gfile ./input/hgdp.geno -efile ./input/covariates -scalecov -outprefix ./results_standard/hgdp_stdis
 ```
 
 > * This generates 9 output files.
