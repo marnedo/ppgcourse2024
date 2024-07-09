@@ -411,7 +411,7 @@ bash run_stdis_model.sh
 ```
 
 > * This generates 9 output files.
-> * It takes ~ 6 mins.
+> * It takes ~ 9 mins.
 
 ### 2. Inspect the obtained **results** (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
@@ -490,7 +490,7 @@ dev.off()
 ```
 
 ```diff
-- QUESTION: How many significant SNPs are correlating with any of the covariates? based on what creiteria, BF or eBPis? Are all of them correlating in the same way?
+- QUESTION: How many significant SNPs are correlating with any of the covariates? based on what criteria, BF or eBPis? Are all of them correlating in the same way?
 ```
 
 ### 3. Calibrate the STDis Parameters (BF, the eBPis and the correlation coefficients) using PODs.
