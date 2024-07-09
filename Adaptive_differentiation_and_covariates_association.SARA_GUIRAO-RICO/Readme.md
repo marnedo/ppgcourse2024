@@ -786,13 +786,20 @@ bash ./scripts/run_stdis_contrast_10000_simulations.sh
 3.3. **Sanity Check**.
 
 ```R
+setwd("./results_stdis_contr")
+source("../baypass_utils.R")
+
 #Read the omega matrix from observed data:
 omega_contrast=as.matrix(read.table(file="hgdp_contrast_mat_omega.out", header=F))
 
 #Get estimate of omega from the PODs
 pod.c2.omega=as.matrix(read.table("hgdp_contrast_10000_pods_mat_omega.out"))
+
+#Plot the observed versus the simulated omegas:
+pdf(file="comparison_omega_obs_sim_10000_pods.pdf")
 plot(pod.c2.omega,omega_contrast) 
     abline(a=0,b=1)
+dev.off()
     
 #Get the distance between the simulated and the real omega    
 fmd.dist(pod.c2.omega,omega_contrast)
@@ -802,16 +809,27 @@ c2.pi.beta.coef=read.table("hgdp_contrast_summary_beta_params.out",h=T)$Mean
 
 #Get estimates (post. mean) of both the a_pi and b_pi parameters of the Pi Beta distribution from the POD analysis
 pod.c2.pi.beta.coef=read.table("hgdp_contrast_10000_pods_summary_beta_params.out",h=T)$Mean
+
+#Plot the observed versus the simulated pi.beta:
+pdf(file="comparison_pi.beta_obs_sim_10000_pods.pdf")
 plot(pod.c2.pi.beta.coef,c2.pi.beta.coef) 
     abline(a=0,b=1)
+dev.off()
 ```
 
 3.4. **Calibrate** the C2 and BF.
 
 ```R
+setwd("./results_stdis_contr")
+source("../baypass_utils.R")
+
 #Read the obtained results from real data
 covariates_eu.bf.all <-
 	read.table(file="hgdp_contrast_summary_betai_reg.out", h=T)
+
+#Read the files with the BF and the C2
+covariates_eu.bf=read.table("hgdp_contrast_summary_betai_reg.out",h=T)$BF.dB.
+covariates_eu.C2=read.table("hgdp_contrast_summary_contrast.out",h=T)
 
 #Read the files with the simulated C2 and BF
 pod.c2_10000=read.table("hgdp_contrast_10000_pods_summary_contrast.out",h=T)
@@ -835,6 +853,9 @@ dev.off()
 3.5. **Plot** the observed C2 and BF for a matter of comparison (**R in your laptop**).
 
 ```R
+setwd("./results_stdis_contr")
+source("../baypass_utils.R")
+
 #Read the obtained results for the real data
 covariates_eu.bf.all <-
 	read.table(file="hgdp_contrast_summary_betai_reg.out", h=T)
