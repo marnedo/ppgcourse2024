@@ -417,7 +417,7 @@ mkdir results_standard
 ### 2. Inspect the obtained **results** (**after creating the pdf file, move it to your shared folder to be able to visualize the result in your laptop**).
 
 ```R
-setwd("./results_core")
+setwd("./results_standard")
 source("../baypass_utils.R")
 
 #Read the file with the BF, the eBPis and the correlation coefficients parameters
