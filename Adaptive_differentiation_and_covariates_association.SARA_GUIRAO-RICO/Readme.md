@@ -14,7 +14,7 @@ These **two SNPs** have been previously reported to be **under positive selectio
 ## Working space
 We are going to work in a container of the image *ppgcourseub/ppg24:latest*
 
-Yoy can find teh executable binary of `BayPass` (g_baypass) is in the folder `./software/baypass_public/source. 
+You can find the executable binary of `BayPass` (g_baypass) in the folder `./software/baypass_public/source. 
  
 
 ## Data
@@ -38,7 +38,7 @@ ghget https://github.com/ppgcourseUB/ppgcourse2024/tree/main/Adaptive_differenti
 scp -r username@ec2-99-81-228-243.eu-west-1.compute.amazonaws.com:/data/datasets/BayPass/results .
 ```
 
-* The files in the results folder are classified in subfolders according to the model/process (e.g., CORE, STDis,...) and for each in turn, in simulations or plot subfolders.
+* The files in the results folder are classified in subfolders according to the model/process (e.g., CORE, STDis,...) and for each, in turn, in simulations or plot subfolders.
 
 ### 3. The "baypass_utils.R" file 
 
