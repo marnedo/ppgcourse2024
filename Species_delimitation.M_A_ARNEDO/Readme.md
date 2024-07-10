@@ -5,19 +5,19 @@
 ## Programs
 
 + ABGD, available at http://wwwabi.snv.jussieu.fr/public/abgd/
-Automatic identification of the barcoding gap (Puillandre et al., 2012). ABGD requires users to provide several parameters: the genetic distance (for example, Jukes-Cantor or p-distances), a prior limit on intraspecific diversity (P), and a proxy for minimum width of barcoding gaps (X). For each set of user parameters, it returns two constraints: a "primary partition" and a "recursive" one obtained after applying its algorithm recursively.
-ATTENTION: This approach has recently been superseded by ASAP (Assemble species by automatic partitioning; Puillandre et al., 2021), available at https://bioinfo.mnhn.fr/abi/public/asap/.
-+ GMYC can be run in R environment with SPLITS package package v 1.0-19 avialbale at https://rdrr.io/rforge/splits/. 
-It can also be run on-line at: https://species.h-its.org/gmyc/
-There is a Bayesian version bGMYC that allows uncertainty measures to be assigned to the constraint: R package available at: https://nreid.github.io/software/
-+ (m)PTP , available at https://github.com/Pas-Kapli/mptp
-It uses a dynamic programming implementation that estimates the ML delimitation faster and more accurately than the original PTP. It assumes a different exponential distribution for branching events for each of the bounded species, allowing it to fit a wider range of empirical data sets. It also incorporates the option of determining minimum branch length for your own data sets.
+Automatic identification of the barcoding gap (Puillandre et al., 2012). ABGD requires users to provide several parameters: the genetic distance (for example, Jukes-Cantor or p-distances), a prior limit on intraspecific diversity (P), and a proxy for minimum width of barcoding gaps (X). Each set of user parameters returns two constraints: a "primary partition" and a "recursive" one obtained after recursively applying its algorithm.
+ATTENTION: ASAP has recently superseded this approach (Assemble species by automatic partitioning; Puillandre et al., 2021), available at https://bioinfo.mnhn.fr/abi/public/asap/.
++ GMYC can be run in R environment with SPLITS package package v 1.0-19 available at https://rdrr.io/rforge/splits/. 
+It can also be run online at: https://species.h-its.org/gmyc/
+There is a Bayesian version of bGMYC that allows uncertainty measures to be assigned to the constraint: R package available at: https://nreid.github.io/software/
++ (m)PTP, available at https://github.com/Pas-Kapli/mptp
+It uses a dynamic programming implementation that estimates the ML delimitation faster and more accurately than the original PTP. It assumes a different exponential distribution for branching events for each of the bounded species, allowing it to fit a wider range of empirical data sets. It also incorporates the option of determining the minimum branch length for your own data sets.
 The PTP-like methods family can be run online at:
 PTP/mPTP: https://mptp.h-its.org/#/tree
 bPTP: https://cme.h-its.org/exelixis/web/software/PTP/index.html
 + BPP v. 4, available at http://abacus.gene.ucl.ac.uk/software.html
-It incorporates the multiple species coalescent model (MSC) and allows (1) the estimation of the parameters of divergence times of species and population sizes when the phylogeny of the species is given (Rannala and Yang, 2003), (2) the Species tree inference using user-supplied individual-to-species assignments (Rannala and Yang, 2017), (3) species delimitation using a user-specified guide tree (Yang and Rannala, 2010; Rannala and Yang, 2013 ), (4) the joint delimitation of species and estimation of species trees (Yang and Rannala 2014). 
-The last version of BPP now also implements the multispecies-coalescing-with-introgression (MSci) model (see Flouri et al, 2020), an extension of the multispecies coalescing model to incorporate introgression/hybridization.
+It incorporates the multiple species coalescent model (MSC). It allows (1) the estimation of the parameters of divergence times of species and population sizes when the phylogeny of the species is given (Rannala and Yang, 2003), (2) the Species tree inference using user-supplied individual-to-species assignments (Rannala and Yang, 2017), (3) species delimitation using a user-specified guide tree (Yang and Rannala, 2010; Rannala and Yang, 2013 ), (4) the joint delimitation of species and estimation of species trees (Yang and Rannala 2014). 
+The last version of BPP also implements the multispecies-coalescing-with-introgression (MSci) model (see Flouri et al, 2020), an extension of the multispecies coalescing model to incorporate introgression/hybridization.
 
 ## Data
 
@@ -39,7 +39,7 @@ BPP output files (outfile, mcmcfile)
 
 ## Aim
 
-Become familiar with the use of different types of programs for species delimitation. Perform different types of quantitative species delimitation analyses in bears (_Ursus_) using single and multilocus approaches from unique markers. 
+Become familiar with the use of different types of programs for species delimitation. Perform quantitative species delimitation analyses in bears (_Ursus_) using single and multilocus approaches from unique markers. 
 
 ## Procedure
 
@@ -62,7 +62,7 @@ How many clusters have you found between 1 to 3% of prior interspecific pairwise
 
 **1.2. Evolutionary criteria: the GMYC model**
 
-To use this approach, we first need to infer a phylogenetic tree form our data, then transform it to ultrametric and finally apply the GMYC model. There are several ways to obtain an ultrametric tree:
+To use this approach, we first need to infer a phylogenetic tree from our data, then transform it into an ultrametric, and finally apply the GMYC model. There are several ways to obtain an ultrametric tree:
 
 1. Inferring first a tree with branches proportional to substitutions using either max. likelihood (eg. `iqtree`) and then transforming the tree to ultrametric using programs such as `PATHd8` or `R8S` (penalized likelihood).
 
