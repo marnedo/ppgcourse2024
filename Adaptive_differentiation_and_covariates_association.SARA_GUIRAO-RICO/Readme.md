@@ -51,7 +51,7 @@ To run this model (using allele count data) you will need:
 * A random number for the **seed** (in case of needed; ```-seed```)
 * A **prefix to name the output** (```-outprefix```)
 
-> *  For more specifications see [BayPass manual](https://www1.montpellier.inra.fr/CBGP/software/baypass/files/BayPass_manual_2.3.pdf) 
+> *  For more specifications see [BayPass manual](https://forgemia.inra.fr/mathieu.gautier/baypass_public/-/blob/master/manual/BayPass_manual.pdf?ref_type=heads) 
 
 ### 1. Run BayPass under the **CORE Model**
  
