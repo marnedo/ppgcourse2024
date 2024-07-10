@@ -513,9 +513,6 @@ simu.hgdp_10000 <- simulate.baypass(omega.mat=omega_s1, nsnp=10000,
 	sample.size= hgdp.data$NN, beta.pi=pi.beta.coef, pi.maf=0, suffix="hgdp_pods_10000")
 ```
 
-> [!Warning]
-> We are not running the part between the two :no_entry: symbols for a matter of time ( it takes about ~ 25 mins). Instead, we are going to use the precomputed files in the results folder
-
 3.2. Run STDis model with 10,000 PODS as input with the script "run_stdis_10000_simulations.sh" 
 
 ```bash
