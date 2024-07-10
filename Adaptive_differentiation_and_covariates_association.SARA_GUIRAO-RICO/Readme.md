@@ -27,7 +27,7 @@ ghget https://github.com/ppgcourseUB/ppgcourse2024/tree/main/Adaptive_differenti
 > [!Tip]
 > Remember that Mac users may need first to download the folder in the "/tmp" directory and then move it to the ppguser 
 
-* The folder has two main subfolders:
+* The folder has three main subfolders:
 
 	*  input: genotype and covariate input data needed for the analysis. 
 	*  scripts: scripts to execute some of the BayPass models and to perform simulations (PODs).
